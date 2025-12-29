@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!--
+  quienes-somos.html
+  - Estructura de la página (front-end).
+  - Comentarios para explicar qué se renderiza y qué IDs/clases espera el JS.
+  - NO cambia funcionalidad.
+-->
+
+  <!-- ============================================================================================
+    QUIÉNES SOMOS — Triada Cognitiva
+    - Página dedicada
+    - Reutiliza main.css para consistencia
+    - Agrega quienes.css para estilos propios
+  ============================================================================================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiénes Somos | Triada Cognitiva</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS global + CSS página -->
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/quienes.css" />
+
+  <!-- JS global + JS página -->
+  <script defer src="scripts/main.js"></script>
+  <script defer src="scripts/quienes.js"></script>
+</head>
+
+<body>
+
+  <!-- ============================================================================================
+    NAVBAR (mismo look del landing)
+    - Marca la página actual con aria-current="page"
+  ============================================================================================= -->
+  <!-- NAVBAR: reutiliza la estructura del sitio para que main.css aplique estilos -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="logo">
+        <a href="index.html" aria-label="Ir al inicio">
+          <img src="assets/images/logo.png" alt="Triada Cognitiva" />
+        </a>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="¿Qué quieres aprender?" aria-label="Buscar cursos" />
+        <button type="button" aria-label="Buscar"><span>🔍</span></button>
+      </div>
+
+      <div class="nav-actions">
+        <a href="login/index.html">Iniciar Sesión</a>
+        <a href="login/index.html">Regístrate</a>
+        <a href="#" class="cart-icon" aria-label="Carrito">🛒</a>
+      </div>
+    </div>
+
+    <nav class="nav-menu" aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes-somos.html" aria-current="page">Quienes Somos</a></li>
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+        <li><a href="index.html#testimonios">Testimonios</a></li>
+        <li><a href="index.html#docentes">Docentes</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============================================================================================
+    HERO — QUIÉNES SOMOS
+  ============================================================================================= -->
+  <section class="qs-hero">
+    <div class="container qs-hero-grid">
+      <div class="qs-hero-copy tc-reveal">
+        <p class="qs-kicker">TRIADA COGNITIVA</p>
+        <h1 class="qs-title">Formación con propósito, evidencia y aplicación real</h1>
+        <p class="qs-lead">
+          Somos un centro de formación online que convierte conocimiento experto en herramientas
+          concretas para tu práctica profesional. Aprendes claro, aplicas rápido y avanzas con respaldo.
+        </p>
+
+        <div class="qs-hero-cta">
+          <a class="btn-see-all qs-btn-primary" href="cursos.html">Ver cursos</a>
+          <a class="qs-btn-ghost" href="#nuestra-historia">Conocer nuestra historia →</a>
+        </div>
+
+        <div class="qs-trust">
+          <div class="qs-trust-item">
+            <strong data-count="2022">2022</strong>
+            <span>fundado</span>
+          </div>
+          <div class="qs-trust-item">
+            <strong data-count="230">230</strong>
+            <span>alumnos</span>
+          </div>
+          <div class="qs-trust-item">
+            <strong data-count="100">100%</strong>
+            <span>online</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="qs-hero-media tc-reveal" aria-label="Imagen representativa">
+        <div class="qs-hero-card">
+          <div class="qs-hero-img" role="img" aria-label="Equipo de formación"></div>
+
+          <div class="qs-hero-badges">
+            <span class="qs-pill">Docentes con experiencia</span>
+            <span class="qs-pill">Material actualizado</span>
+            <span class="qs-pill">Aprendizaje aplicado</span>
+          </div>
+
+          <div class="qs-hero-quote">
+            <p>“Diseñamos programas que se entienden, se usan y generan impacto.”</p>
+            <span>— Equipo Triada Cognitiva</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================================================================================
+    NUESTRA HISTORIA
+  ============================================================================================= -->
+  <section class="section qs-story" id="nuestra-historia">
+    <div class="container qs-story-grid">
+      <div class="qs-story-copy tc-reveal">
+        <p class="qs-kicker">NUESTRA HISTORIA</p>
+        <h2 class="qs-h2">Nacimos para hacer la formación más útil y cercana</h2>
+        <p class="qs-p">
+          Triada Cognitiva surge con una idea simple: que la formación no se quede en teoría.
+          Creamos experiencias claras, con docentes expertos y recursos listos para usar en aula,
+          clínica y equipos profesionales.
+        </p>
+
+        <div class="qs-story-points">
+          <div class="qs-point tc-reveal">
+            <h3>Contenido accionable</h3>
+            <p>Aprendes con ejemplos reales, guías y herramientas descargables.</p>
+          </div>
+          <div class="qs-point tc-reveal">
+            <h3>Calidad y respaldo</h3>
+            <p>Programas construidos con enfoque profesional y actualización permanente.</p>
+          </div>
+          <div class="qs-point tc-reveal">
+            <h3>Flexibilidad</h3>
+            <p>Clases en vivo + acceso diferido para ajustar a tus tiempos.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="qs-story-media tc-reveal">
+        <div class="qs-collage">
+          <div class="qs-collage-img qs-collage-a" role="img" aria-label="Clases en vivo"></div>
+          <div class="qs-collage-img qs-collage-b" role="img" aria-label="Aprendizaje práctico"></div>
+          <div class="qs-collage-badge">
+            <span class="qs-dot"></span>
+            <span>Formación aplicada y profesional</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================================
+    MISIÓN / VISIÓN
+  ============================================================================================= -->
+  <section class="section qs-mv">
+    <div class="container">
+      <div class="qs-mv-head tc-reveal">
+        <p class="qs-kicker">PROPÓSITO</p>
+        <h2 class="qs-h2">Misión y visión claras para crecer contigo</h2>
+        <p class="qs-sub">
+          Nuestro foco es ayudarte a potenciar tu impacto profesional con formación de alta calidad,
+          metodología clara y herramientas aplicables.
+        </p>
+      </div>
+
+      <div class="qs-mv-grid">
+        <article class="qs-mv-card tc-reveal">
+          <div class="qs-ico" aria-hidden="true">🎯</div>
+          <h3>Misión</h3>
+          <p>
+            Entregar programas formativos útiles y actualizados que transformen conocimiento en práctica,
+            con acompañamiento y recursos concretos.
+          </p>
+        </article>
+
+        <article class="qs-mv-card tc-reveal">
+          <div class="qs-ico" aria-hidden="true">🔭</div>
+          <h3>Visión</h3>
+          <p>
+            Ser un referente en formación online aplicada para profesionales de educación, salud y ámbito psicosocial,
+            con estándares de excelencia.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================================
+    VALORES
+  ============================================================================================= -->
+  <section class="section qs-values">
+    <div class="container">
+      <div class="qs-values-head tc-reveal">
+        <p class="qs-kicker">NUESTROS VALORES</p>
+        <h2 class="qs-h2">Lo que guía cada curso que creamos</h2>
+      </div>
+
+      <div class="qs-values-grid">
+        <article class="qs-value tc-reveal">
+          <h3>Claridad</h3>
+          <p>Diseño pedagógico simple, ordenado y fácil de aplicar.</p>
+        </article>
+        <article class="qs-value tc-reveal">
+          <h3>Rigor</h3>
+          <p>Contenidos con base profesional y enfoque actualizado.</p>
+        </article>
+        <article class="qs-value tc-reveal">
+          <h3>Aplicación</h3>
+          <p>Herramientas listas para usar en tu realidad laboral.</p>
+        </article>
+        <article class="qs-value tc-reveal">
+          <h3>Cercanía</h3>
+          <p>Acompañamiento, respuestas claras y comunidad profesional.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================================
+    METODOLOGÍA (Steps)
+  ============================================================================================= -->
+  <section class="section qs-method">
+    <div class="container qs-method-grid">
+      <div class="qs-method-copy tc-reveal">
+        <p class="qs-kicker">CÓMO ENSEÑAMOS</p>
+        <h2 class="qs-h2">Metodología diseñada para que avances de verdad</h2>
+        <p class="qs-p">
+          Cada programa está pensado para que aprendas con claridad, practiques con guía
+          y termines con recursos que puedas implementar el mismo día.
+        </p>
+
+        <a class="btn-see-all qs-btn-primary" href="cursos.html">Explorar programas</a>
+      </div>
+
+      <ol class="qs-steps">
+        <li class="qs-step tc-reveal">
+          <div class="qs-step-num">01</div>
+          <div class="qs-step-body">
+            <h3>Diagnóstico del tema</h3>
+            <p>Partimos con conceptos clave y mapa general para entender el “por qué”.</p>
+          </div>
+        </li>
+
+        <li class="qs-step tc-reveal">
+          <div class="qs-step-num">02</div>
+          <div class="qs-step-body">
+            <h3>Herramientas y casos</h3>
+            <p>Ejemplos reales, guías y recursos descargables para tu práctica.</p>
+          </div>
+        </li>
+
+        <li class="qs-step tc-reveal">
+          <div class="qs-step-num">03</div>
+          <div class="qs-step-body">
+            <h3>Aplicación guiada</h3>
+            <p>Actividades y estructura para implementar sin improvisar.</p>
+          </div>
+        </li>
+
+        <li class="qs-step tc-reveal">
+          <div class="qs-step-num">04</div>
+          <div class="qs-step-body">
+            <h3>Cierre + próximos pasos</h3>
+            <p>Checklist, recomendaciones y ruta para seguir profundizando.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================================================
+    CTA FINAL
+  ============================================================================================= -->
+  <section class="qs-cta">
+    <div class="container qs-cta-card tc-reveal">
+      <div>
+        <h2>¿Listo para potenciar tu impacto profesional?</h2>
+        <p>
+          Elige un programa, aprende con claridad y aplica herramientas concretas en tu trabajo.
+        </p>
+      </div>
+
+      <div class="qs-cta-actions">
+        <a class="btn-see-all qs-btn-primary" href="cursos.html">Ver cursos</a>
+        <a class="qs-btn-ghost" href="index.html#contacto">Hablar con nosotros →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================================
+    FOOTER (reutiliza estilos actuales)
+  ============================================================================================= -->
+  <!-- FOOTER: pie de página global -->
+  <footer class="site-footer">
+    <div class="footer-container">
+
+      <div class="footer-column footer-logo-col">
+        <img src="assets/images/logo.png" alt="Logo Triada Cognitiva" class="footer-logo">
+        <p class="footer-location-title">Estamos presentes en:</p>
+
+        <ul class="footer-locations">
+          <li>🇨🇱 Chile</li>
+          <li>🇲🇽 México</li>
+          <li>🇨🇴 Colombia</li>
+          <li>🌍 Global</li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Programas</h4>
+        <ul class="footer-links">
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="cursos.html">Seminarios</a></li>
+          <li><a href="cursos.html">Diplomados</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Recursos</h4>
+        <ul class="footer-links">
+          <li><a href="quienes-somos.html">Quienes Somos</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#docentes">Docentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contacto</h4>
+        <p><span>📞</span> +56 9 5725 3424</p>
+        <p><span>✉️</span> contacto@triadacognitiva.com</p>
+        <p><span>📍</span> Talca, Chile · Online</p>
+      </div>
+
+      <div class="footer-column footer-newsletter">
+        <h4>Regístrate en nuestro newsletter</h4>
+
+        <form class="newsletter-form">
+          <input type="text" placeholder="Nombre" required>
+          <input type="email" placeholder="Correo" required>
+          <button type="submit">Enviar</button>
+        </form>
+
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="Instagram">📸</a>
+          <a href="#" aria-label="LinkedIn">💼</a>
+          <a href="#" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="qsYear"></span> Triada Cognitiva — Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+</body>
+</html>

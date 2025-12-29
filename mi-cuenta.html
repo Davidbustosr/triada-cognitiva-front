@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!--
+  mi-cuenta.html
+  - Estructura de la página (front-end).
+  - Comentarios para explicar qué se renderiza y qué IDs/clases espera el JS.
+  - NO cambia funcionalidad.
+-->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Cuenta | Triada Cognitiva</title>
+
+  <!-- CSS base + CSS de esta página -->
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/cuenta.css" />
+
+  <!-- JS de esta página -->
+  <script defer src="scripts/cuenta.js"></script>
+</head>
+
+<body>
+  <!-- NAVBAR (igual a tu patrón actual) -->
+  <!-- NAVBAR: reutiliza la estructura del sitio para que main.css aplique estilos -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Triada Cognitiva" />
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="¿Qué quieres aprender?" />
+        <button type="button"><span>🔍</span></button>
+      </div>
+
+      <div class="nav-actions">
+        <a href="login.html">Iniciar Sesión</a>
+        <a href="login.html#register">Regístrate</a>
+        <a href="#" class="cart-icon" aria-label="Carrito">🛒</a>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes-somos.html">Quienes Somos</a></li>
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="index.html#testimonios">Testimonios</a></li>
+        <li><a href="index.html#docentes">Docentes</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+        <li><a href="mi-cuenta.html"><strong>Mi cuenta</strong></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL: aquí vive la sección específica de la página -->
+  <main class="tc-account">
+    <!-- HERO / HEADER -->
+    <section class="tc-account-hero">
+      <div class="container tc-account-hero__inner tc-reveal">
+        <div class="tc-account-hero__left">
+          <p class="tc-kicker">MI CUENTA</p>
+          <h1 class="tc-account-title">Tus cursos y compras</h1>
+          <p class="tc-account-lead">
+            Revisa tus programas adquiridos, estado de tus compras y accesos. Cuando se conecte el backend,
+            esta sección se llenará automáticamente con tus datos reales.
+          </p>
+
+          <div class="tc-account-quick">
+            <div class="tc-quick-card">
+              <span class="tc-quick-label">Cursos activos</span>
+              <strong id="statActive">0</strong>
+            </div>
+            <div class="tc-quick-card">
+              <span class="tc-quick-label">Total compras</span>
+              <strong id="statTotal">0</strong>
+            </div>
+            <div class="tc-quick-card">
+              <span class="tc-quick-label">Último acceso</span>
+              <strong id="statLast">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <aside class="tc-account-hero__right">
+          <div class="tc-profile-card tc-reveal" style="--d:80ms">
+            <div class="tc-profile-top">
+              <div class="tc-avatar" aria-hidden="true">
+                <span id="profileInitials">TC</span>
+              </div>
+
+              <div class="tc-profile-meta">
+                <h3 id="profileName" class="tc-profile-name">Cargando…</h3>
+                <p id="profileEmail" class="tc-profile-email">—</p>
+              </div>
+            </div>
+
+            <div class="tc-profile-actions">
+              <a href="cursos.html" class="tc-btn tc-btn--outline">Explorar cursos</a>
+              <button id="logoutBtn" class="tc-btn tc-btn--primary" type="button">Cerrar sesión</button>
+            </div>
+
+            <p class="tc-profile-note">
+              * Esta sesión es “mock” (front). Con backend, el login será real y seguro.
+            </p>
+          </div>
+
+          <div class="tc-help-card tc-reveal" style="--d:140ms">
+            <div class="tc-help-ico" aria-hidden="true">💬</div>
+            <div>
+              <strong>¿Necesitas ayuda?</strong>
+              <p>Escríbenos por WhatsApp y te guiamos con tu compra o acceso.</p>
+              <a class="tc-help-link" target="_blank" rel="noopener" href="https://wa.me/56900000000?text=Hola%20Triada%20Cognitiva%2C%20necesito%20ayuda%20con%20mi%20cuenta">
+                Hablar por WhatsApp →
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- TABS / NAV -->
+    <section class="section">
+      <div class="container">
+        <div class="tc-account-tabs tc-reveal">
+          <button class="tc-tab is-active" data-tab="purchases" type="button">Mis compras</button>
+          <button class="tc-tab" data-tab="courses" type="button">Mis cursos</button>
+          <button class="tc-tab" data-tab="settings" type="button">Ajustes</button>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="tc-account-panels">
+          <!-- PANEL: COMPRAS -->
+          <section class="tc-panel is-active" id="panel-purchases" aria-label="Mis compras">
+            <div class="tc-panel-head">
+              <div>
+                <h2>Compras</h2>
+                <p>Historial de compras. Puedes abrir detalle o ir directo al curso.</p>
+              </div>
+
+              <div class="tc-panel-actions">
+                <a class="tc-btn tc-btn--outline" href="cursos.html">Ver catálogo</a>
+              </div>
+            </div>
+
+            <!-- STATES -->
+            <div id="purchasesLoading" class="tc-state tc-state--loading">
+              <div class="tc-skeleton-grid">
+                <div class="tc-skeleton"></div>
+                <div class="tc-skeleton"></div>
+                <div class="tc-skeleton"></div>
+              </div>
+            </div>
+
+            <div id="purchasesEmpty" class="tc-state tc-state--empty hidden">
+              <div class="tc-empty-card">
+                <h3>Aún no tienes compras</h3>
+                <p>Cuando compres un curso, aparecerá aquí con su estado y acceso.</p>
+                <a class="tc-btn tc-btn--primary" href="cursos.html">Explorar cursos →</a>
+              </div>
+            </div>
+
+            <div id="purchasesError" class="tc-state tc-state--error hidden">
+              <div class="tc-empty-card">
+                <h3>No pudimos cargar tus compras</h3>
+                <p>Revisa la consola o conecta el backend. Por ahora puedes navegar el catálogo.</p>
+                <button id="retryPurchases" class="tc-btn tc-btn--primary" type="button">Reintentar</button>
+              </div>
+            </div>
+
+            <!-- GRID -->
+            <div id="purchasesGrid" class="tc-grid hidden"></div>
+          </section>
+
+          <!-- PANEL: CURSOS -->
+          <section class="tc-panel" id="panel-courses" aria-label="Mis cursos">
+            <div class="tc-panel-head">
+              <div>
+                <h2>Cursos</h2>
+                <p>Accesos rápidos a los cursos que tengas activos.</p>
+              </div>
+            </div>
+
+            <div id="coursesEmpty" class="tc-state tc-state--empty">
+              <div class="tc-empty-card">
+                <h3>Tu biblioteca está vacía</h3>
+                <p>Cuando tengas cursos, aquí verás tus accesos directos.</p>
+                <a class="tc-btn tc-btn--primary" href="cursos.html">Ir a cursos →</a>
+              </div>
+            </div>
+
+            <div id="myCoursesGrid" class="tc-grid hidden"></div>
+          </section>
+
+          <!-- PANEL: AJUSTES -->
+          <section class="tc-panel" id="panel-settings" aria-label="Ajustes de cuenta">
+            <div class="tc-panel-head">
+              <div>
+                <h2>Ajustes</h2>
+                <p>Preferencias y seguridad. (Diseño listo; backend lo conecta.)</p>
+              </div>
+            </div>
+
+            <div class="tc-settings-grid">
+              <div class="tc-card tc-reveal">
+                <h3>Datos de perfil</h3>
+                <p>Nombre y correo se completarán con backend.</p>
+
+                <div class="tc-form">
+                  <div class="tc-field">
+                    <label>Nombre</label>
+                    <input id="settingsName" type="text" placeholder="Tu nombre" />
+                  </div>
+
+                  <div class="tc-field">
+                    <label>Correo</label>
+                    <input id="settingsEmail" type="email" placeholder="tu@correo.com" />
+                  </div>
+
+                  <button id="saveProfileBtn" class="tc-btn tc-btn--primary" type="button">
+                    Guardar cambios
+                  </button>
+
+                  <p class="tc-form-note" id="saveProfileNote"></p>
+                </div>
+              </div>
+
+              <div class="tc-card tc-reveal" style="--d:90ms">
+                <h3>Seguridad</h3>
+                <p>Cuando haya backend, aquí podrás cambiar contraseña.</p>
+
+                <div class="tc-form">
+                  <div class="tc-field">
+                    <label>Nueva contraseña</label>
+                    <input type="password" placeholder="••••••••" disabled />
+                  </div>
+
+                  <div class="tc-field">
+                    <label>Confirmar contraseña</label>
+                    <input type="password" placeholder="••••••••" disabled />
+                  </div>
+
+                  <button class="tc-btn tc-btn--outline" type="button" disabled>
+                    Cambiar contraseña
+                  </button>
+
+                  <p class="tc-form-note">
+                    * Bloqueado hasta conectar backend.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (tu estilo ya existe) -->
+  <!-- FOOTER: pie de página global -->
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>© Triada Cognitiva 2025 — Todos los derechos reservados</p>
+    </div>
+  </footer>
+</body>
+</html>

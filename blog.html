@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!--
+  blog.html
+  - Estructura de la página (front-end).
+  - Comentarios para explicar qué se renderiza y qué IDs/clases espera el JS.
+  - NO cambia funcionalidad.
+-->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Triada Cognitiva</title>
+
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/blog.css" />
+
+  <script defer src="scripts/blog.js"></script>
+</head>
+
+<body>
+  <!-- NAVBAR (misma estructura para que main.css lo tome) -->
+  <!-- NAVBAR: reutiliza la estructura del sitio para que main.css aplique estilos -->
+  <header class="navbar" id="siteNavbar">
+    <div class="navbar-container">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Triada Cognitiva" />
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="¿Qué quieres aprender?" />
+        <button type="button" aria-label="Buscar"><span>🔍</span></button>
+      </div>
+
+      <div class="nav-actions">
+        <a href="login.html"><strong>Iniciar Sesión</strong></a>
+        <a href="login.html#register">Regístrate</a>
+        <a href="#" class="cart-icon" aria-label="Carrito">🛒</a>
+      </div>
+    </div>
+
+    <nav class="nav-menu" aria-label="Menú principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes-somos.html">Quienes Somos</a></li>
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="blog.html"><strong>Blog</strong></a></li>
+        <li><a href="index.html#testimonios">Testimonios</a></li>
+        <li><a href="index.html#docentes">Docentes</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL: aquí vive la sección específica de la página -->
+  <main class="tc-blog">
+    <!-- Header -->
+    <section class="tc-blog-hero">
+      <div class="container tc-blog-hero__grid">
+        <div class="tc-blog-hero__left tc-reveal">
+          <p class="tc-kicker">BLOG</p>
+          <h1 class="tc-blog-hero__title">Reflexiones y pensamiento clínico</h1>
+          <p class="tc-blog-hero__lead">
+            Publicaciones breves desde la mirada profesional: ideas, análisis y reflexiones para tu práctica.
+          </p>
+
+          <div class="tc-blog-tools">
+            <div class="tc-blog-search">
+              <span class="tc-blog-search__ico" aria-hidden="true">🔎</span>
+              <input id="blogSearch" type="search" placeholder="Buscar por título o contenido..." autocomplete="off" />
+            </div>
+
+            <select id="blogSort" class="tc-blog-select" aria-label="Ordenar publicaciones">
+              <option value="new">Más recientes</option>
+              <option value="old">Más antiguas</option>
+              <option value="az">A–Z</option>
+            </select>
+          </div>
+
+          <div class="tc-blog-mini tc-reveal">
+            <div class="tc-blog-mini__card">
+              <strong id="blogCount">0</strong>
+              <span>publicaciones</span>
+            </div>
+            <div class="tc-blog-mini__card">
+              <strong>Profesional</strong>
+              <span>enfoque clínico</span>
+            </div>
+            <div class="tc-blog-mini__card">
+              <strong>Breve</strong>
+              <span>lectura rápida</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="tc-blog-hero__right tc-reveal">
+          <div class="tc-blog-highlight">
+            <div class="tc-blog-highlight__badge">
+              <span class="tc-dot" aria-hidden="true"></span>
+              Publicación destacada
+            </div>
+
+            <h2 class="tc-blog-highlight__title" id="featuredTitle">Cargando…</h2>
+            <p class="tc-blog-highlight__excerpt" id="featuredExcerpt"></p>
+
+            <div class="tc-blog-highlight__meta">
+              <span id="featuredAuthor">—</span>
+              <span class="tc-blog-sep" aria-hidden="true">•</span>
+              <span id="featuredDate">—</span>
+            </div>
+
+            <div class="tc-blog-highlight__actions">
+              <a id="featuredLink" class="tc-btn tc-btn--primary" href="blog.html">Leer</a>
+              <a class="tc-btn tc-btn--ghost" href="#listado" id="goList">Ver listado</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Detalle (se muestra solo con ?id=...) -->
+    <section class="tc-blog-detail hidden" id="blogDetail">
+      <div class="container tc-blog-detail__wrap">
+        <a class="tc-blog-back" href="blog.html" id="backToList">← Volver al listado</a>
+
+        <article class="tc-blog-article tc-reveal">
+          <header class="tc-blog-article__head">
+            <p class="tc-blog-article__kicker">REFLEXIÓN</p>
+            <h2 class="tc-blog-article__title" id="postTitle">—</h2>
+
+            <div class="tc-blog-article__meta">
+              <span class="tc-blog-chip" id="postAuthor">—</span>
+              <span class="tc-blog-chip" id="postCity">—</span>
+              <span class="tc-blog-chip" id="postDate">—</span>
+            </div>
+          </header>
+
+          <div class="tc-blog-article__body" id="postBody"></div>
+
+  <!-- FOOTER: pie de página global -->
+          <footer class="tc-blog-article__foot">
+            <div class="tc-blog-tags" id="postTags"></div>
+            <div class="tc-blog-share">
+              <button class="tc-btn tc-btn--ghost" id="copyLinkBtn" type="button">Copiar link</button>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </section>
+
+    <!-- Listado -->
+    <section class="section" id="listado">
+      <div class="container">
+        <div class="tc-blog-head">
+          <h2 class="tc-title">Últimas publicaciones</h2>
+          <p class="tc-lead">Contenido breve, directo y pensado para profesionales del área.</p>
+        </div>
+
+        <div class="tc-blog-state" id="blogState">
+          <div class="tc-blog-loading">
+            <span class="tc-spinner" aria-hidden="true"></span>
+            <strong>Cargando publicaciones…</strong>
+            <span>Un momento.</span>
+          </div>
+        </div>
+
+        <div class="tc-blog-grid" id="blogGrid" aria-live="polite"></div>
+
+        <div class="tc-blog-empty hidden" id="blogEmpty">
+          <h3>No hay publicaciones aún</h3>
+          <p>Cuando el administrador suba reflexiones, aparecerán aquí.</p>
+        </div>
+
+        <div class="tc-blog-error hidden" id="blogError">
+          <h3>No se pudieron cargar las publicaciones</h3>
+          <p>Intenta nuevamente más tarde.</p>
+          <button class="tc-btn tc-btn--primary" id="retryBtn" type="button">Reintentar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER: pie de página global -->
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>© Triada Cognitiva 2025 — Todos los derechos reservados</p>
+    </div>
+  </footer>
+</body>
+</html>

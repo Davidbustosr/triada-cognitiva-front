@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!--
+  cursos.html
+  - Estructura de la página (front-end).
+  - Comentarios para explicar qué se renderiza y qué IDs/clases espera el JS.
+  - NO cambia funcionalidad.
+-->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cursos | Triada Cognitiva</title>
+
+  <!-- CSS global + CSS de cursos -->
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/cursos.css" />
+
+  <!-- JS del listado -->
+  <script defer src="scripts/cursos.js"></script>
+</head>
+
+<body>
+
+  <!-- NAVBAR (reutiliza tu estructura) -->
+  <!-- NAVBAR: reutiliza la estructura del sitio para que main.css aplique estilos -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Triada Cognitiva" />
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="¿Qué quieres aprender?" />
+        <button><span>🔍</span></button>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#">Iniciar Sesión</a>
+        <a href="#">Regístrate</a>
+        <a href="#" class="cart-icon">🛒</a>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes-somos.html">Quienes Somos</a></li>
+        <li><a href="cursos.html"><strong>Cursos</strong></a></li>
+        <li><a href="index.html#testimonios">Testimonios</a></li>
+        <li><a href="index.html#docentes">Docentes</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="tc-catalog-hero">
+    <div class="container tc-catalog-hero__inner tc-reveal">
+      <p class="tc-kicker">CATÁLOGO</p>
+      <h1 class="tc-catalog-hero__title">Explora nuestros cursos</h1>
+      <p class="tc-catalog-hero__lead">
+        Formación aplicada, flexible y con respaldo profesional. Revisa los programas disponibles y entra al detalle.
+      </p>
+
+      <div class="tc-catalog-hero__meta">
+        <div class="tc-meta-pill">
+          <span class="tc-meta-dot" aria-hidden="true"></span>
+          <span><strong id="coursesTotal">0</strong> cursos disponibles</span>
+        </div>
+        <div class="tc-meta-pill">
+          <span class="tc-meta-dot" aria-hidden="true"></span>
+          <span>100% online</span>
+        </div>
+        <div class="tc-meta-pill">
+          <span class="tc-meta-dot" aria-hidden="true"></span>
+          <span>Certificación según programa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTADO -->
+  <section class="tc-catalog section">
+    <div class="container">
+      <div class="tc-catalog-head tc-reveal">
+        <div>
+          <h2 class="tc-catalog-title">Cursos disponibles</h2>
+          <p class="tc-catalog-sub">Selecciona un curso para ver el detalle, temario y modalidad.</p>
+        </div>
+
+        <div class="tc-catalog-count">
+          Mostrando <strong id="coursesCount">0</strong>
+        </div>
+      </div>
+
+      <div id="coursesGrid" class="tc-catalog-grid"></div>
+
+      <div id="coursesEmpty" class="tc-catalog-empty hidden">
+        <h3>No hay cursos para mostrar</h3>
+        <p>Revisa la ruta del JSON o el contenido del archivo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (tu footer actual) -->
+  <!-- FOOTER: pie de página global -->
+  <footer class="site-footer">
+    <div class="footer-container">
+
+      <div class="footer-column footer-logo-col">
+        <img src="assets/images/logo.png" alt="Logo Triada Cognitiva" class="footer-logo">
+        <p class="footer-location-title">Estamos presentes en:</p>
+        <ul class="footer-locations">
+          <li>🇨🇱 Chile</li>
+          <li>🇲🇽 México</li>
+          <li>🇨🇴 Colombia</li>
+          <li>🌍 Global</li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Programas</h4>
+        <ul class="footer-links">
+          <li><a href="cursos.html">Cursos</a></li>
+          <li><a href="#">Seminarios</a></li>
+          <li><a href="#">Diplomados</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Recursos</h4>
+        <ul class="footer-links">
+          <li><a href="quienes-somos.html">Quienes Somos</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#docentes">Docentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contacto</h4>
+        <p><span>📞</span> +56 9 5725 3424</p>
+        <p><span>✉️</span> contacto@triadacognitiva.com</p>
+        <p><span>📍</span> Talca, Chile · Online</p>
+      </div>
+
+      <div class="footer-column footer-newsletter">
+        <h4>Regístrate en nuestro newsletter</h4>
+
+        <form class="newsletter-form">
+          <input type="text" placeholder="Nombre" required>
+          <input type="email" placeholder="Correo" required>
+          <button type="submit">Enviar</button>
+        </form>
+
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="Instagram">📸</a>
+          <a href="#" aria-label="LinkedIn">💼</a>
+          <a href="#" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© Triada Cognitiva 2025 — Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+</body>
+</html>

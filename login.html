@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!--
+  login.html
+  - Estructura de la página (front-end).
+  - Comentarios para explicar qué se renderiza y qué IDs/clases espera el JS.
+  - NO cambia funcionalidad.
+-->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceso | Triada Cognitiva</title>
+
+  <!-- CSS global + CSS de login -->
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/login.css" />
+
+  <!-- JS de login -->
+  <script defer src="scripts/login.js"></script>
+</head>
+
+<body class="tc-auth-page">
+
+  <!-- NAVBAR -->
+  <!-- NAVBAR: reutiliza la estructura del sitio para que main.css aplique estilos -->
+  <header class="navbar" id="siteNavbar">
+    <div class="navbar-container">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Triada Cognitiva" />
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="¿Qué quieres aprender?" />
+        <button type="button" aria-label="Buscar"><span>🔍</span></button>
+      </div>
+
+      <div class="nav-actions">
+        <a href="login.html"><strong>Iniciar Sesión</strong></a>
+        <a href="login.html#register">Regístrate</a>
+        <a href="#" class="cart-icon" aria-label="Carrito">🛒</a>
+      </div>
+    </div>
+
+    <nav class="nav-menu" aria-label="Menú principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes-somos.html">Quienes Somos</a></li>
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="index.html#testimonios">Testimonios</a></li>
+        <li><a href="index.html#docentes">Docentes</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO -->
+  <!-- CONTENIDO PRINCIPAL: aquí vive la sección específica de la página -->
+  <main class="tc-auth" role="main">
+    <div class="container tc-auth__grid">
+
+      <!-- Columna izquierda -->
+      <aside class="tc-auth__side tc-reveal">
+        <p class="tc-auth__kicker">ACCESO A PLATAFORMA</p>
+        <h1 class="tc-auth__title">Bienvenido a Triada Cognitiva</h1>
+        <p class="tc-auth__lead">
+          Inicia sesión para acceder a tus cursos, materiales descargables y certificados (según programa).
+        </p>
+
+        <div class="tc-auth__benefits">
+          <div class="tc-auth__benefit">
+            <span class="tc-auth__icon" aria-hidden="true">✅</span>
+            <div>
+              <strong>Acceso rápido</strong>
+              <p>Tu contenido disponible cuando lo necesites.</p>
+            </div>
+          </div>
+
+          <div class="tc-auth__benefit">
+            <span class="tc-auth__icon" aria-hidden="true">📚</span>
+            <div>
+              <strong>Material actualizado</strong>
+              <p>Recursos y bibliografía para apoyar tu práctica.</p>
+            </div>
+          </div>
+
+          <div class="tc-auth__benefit">
+            <span class="tc-auth__icon" aria-hidden="true">🔒</span>
+            <div>
+              <strong>Cuenta segura</strong>
+              <p>Buenas prácticas de seguridad y privacidad.</p>
+            </div>
+          </div>
+        </div>
+
+        <a class="tc-auth__help tc-reveal"
+           href="https://wa.me/56900000000?text=Hola!%20Tengo%20dudas%20sobre%20la%20plataforma."
+           target="_blank" rel="noopener">
+          <span class="tc-auth__helpDot" aria-hidden="true"></span>
+          ¿Tienes dudas? <strong>Hablemos por WhatsApp.</strong>
+        </a>
+      </aside>
+
+      <!-- Columna derecha -->
+      <section class="tc-auth__card tc-reveal" aria-label="Formulario de acceso">
+        <div class="tc-auth__cardHead">
+          <div class="tc-auth__tabs" role="tablist" aria-label="Acceso o registro">
+            <button class="tc-tab is-active" id="tabLogin" type="button" role="tab" aria-selected="true" aria-controls="panelLogin">
+              Iniciar sesión
+            </button>
+            <button class="tc-tab" id="tabRegister" type="button" role="tab" aria-selected="false" aria-controls="panelRegister">
+              Registrarme
+            </button>
+          </div>
+
+          <p class="tc-auth__cardSub">
+            Ingresa con tu correo o crea una cuenta en segundos.
+          </p>
+        </div>
+
+        <!-- LOGIN -->
+        <div class="tc-auth__panel is-active" id="panelLogin" role="tabpanel" aria-labelledby="tabLogin">
+          <form class="tc-form" id="loginForm" novalidate>
+            <div class="tc-field">
+              <label for="loginEmail">Correo</label>
+              <input id="loginEmail" name="email" type="email" placeholder="tu@correo.com" autocomplete="email" required />
+              <small class="tc-fieldMsg" aria-live="polite"></small>
+            </div>
+
+            <div class="tc-field">
+              <label for="loginPass">Contraseña</label>
+              <div class="tc-pass">
+                <input id="loginPass" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required minlength="6" />
+                <button class="tc-passBtn" type="button" data-pass-toggle="loginPass" aria-label="Mostrar u ocultar contraseña">
+                  👁️
+                </button>
+              </div>
+              <small class="tc-fieldMsg" aria-live="polite"></small>
+            </div>
+
+            <div class="tc-row">
+              <label class="tc-check">
+                <input type="checkbox" id="rememberMe" />
+                <span>Recordarme</span>
+              </label>
+              <a class="tc-linkMini" href="#" id="forgotLink">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <button class="tc-btn tc-btn--primary" type="submit">
+              Entrar <span aria-hidden="true">→</span>
+            </button>
+
+            <p class="tc-auth__switch">
+              ¿Aún no tienes cuenta?
+              <a href="#register" class="tc-linkStrong" id="goRegister">Regístrate aquí</a>
+            </p>
+
+            <div class="tc-note">
+              Al continuar, aceptas el uso responsable de la plataforma.
+            </div>
+
+            <div class="tc-alert" id="loginAlert" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <!-- REGISTER -->
+        <div class="tc-auth__panel" id="panelRegister" role="tabpanel" aria-labelledby="tabRegister">
+          <form class="tc-form" id="registerForm" novalidate>
+
+            <div class="tc-field">
+              <label for="regName">Nombre</label>
+              <input id="regName" name="name" type="text" placeholder="Ej: Camila" autocomplete="given-name" required />
+              <small class="tc-fieldMsg" aria-live="polite"></small>
+            </div>
+
+            <div class="tc-form-row">
+              <div class="tc-field">
+                <label for="regLast1">Primer apellido</label>
+                <input id="regLast1" name="last1" type="text" placeholder="Ej: Pérez" autocomplete="family-name" required />
+                <small class="tc-fieldMsg" aria-live="polite"></small>
+              </div>
+
+              <div class="tc-field">
+                <label for="regLast2">Segundo apellido</label>
+                <input id="regLast2" name="last2" type="text" placeholder="Ej: Soto" autocomplete="additional-name" required />
+                <small class="tc-fieldMsg" aria-live="polite"></small>
+              </div>
+            </div>
+
+            <div class="tc-field">
+              <label for="regEmail">Correo</label>
+              <input id="regEmail" name="email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required />
+              <small class="tc-fieldMsg" aria-live="polite"></small>
+            </div>
+
+            <div class="tc-form-row">
+              <div class="tc-field">
+                <label for="regCity">Ciudad</label>
+                <input id="regCity" name="city" type="text" placeholder="Ej: Talca" autocomplete="address-level2" required />
+                <small class="tc-fieldMsg" aria-live="polite"></small>
+              </div>
+
+              <div class="tc-field">
+                <label for="regCountry">País</label>
+                <input id="regCountry" name="country" type="text" placeholder="Ej: Chile" autocomplete="country-name" required />
+                <small class="tc-fieldMsg" aria-live="polite"></small>
+              </div>
+            </div>
+
+            <div class="tc-form-row">
+              <div class="tc-field">
+                <label for="regAge">Edad</label>
+                <input id="regAge" name="age" type="number" placeholder="Ej: 28" inputmode="numeric" min="14" max="99" required />
+                <small class="tc-fieldMsg" aria-live="polite"></small>
+              </div>
+
+              <div class="tc-field">
+                <label for="regProfession">Profesión</label>
+                <input id="regProfession" name="profession" type="text" placeholder="Ej: Psicopedagoga" required />
+                <small class="tc-fieldMsg" aria-live="polite"></small>
+              </div>
+            </div>
+
+            <div class="tc-field">
+              <label for="regPass">Contraseña</label>
+              <div class="tc-pass">
+                <input id="regPass" name="password" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" required minlength="6" />
+                <button class="tc-passBtn" type="button" data-pass-toggle="regPass" aria-label="Mostrar/ocultar contraseña">👁️</button>
+              </div>
+              <small class="tc-fieldMsg" aria-live="polite"></small>
+            </div>
+
+            <div class="tc-field">
+              <label for="regPass2">Repite tu contraseña</label>
+              <div class="tc-pass">
+                <input id="regPass2" name="password2" type="password" placeholder="Repite la contraseña" autocomplete="new-password" required minlength="6" />
+                <button class="tc-passBtn" type="button" data-pass-toggle="regPass2" aria-label="Mostrar/ocultar contraseña">👁️</button>
+              </div>
+              <small class="tc-fieldMsg" aria-live="polite"></small>
+            </div>
+
+            <div class="tc-row tc-row--register">
+              <label class="tc-check">
+                <input id="terms" type="checkbox" />
+                <span>Acepto términos y condiciones</span>
+              </label>
+            </div>
+
+            <button class="tc-btn tc-btn--primary" type="submit">
+              Crear cuenta <span aria-hidden="true">→</span>
+            </button>
+
+            <p class="tc-auth__switch">
+              ¿Ya tienes cuenta?
+              <a href="#login" class="tc-linkStrong" id="goLogin">Inicia sesión</a>
+            </p>
+
+            <div class="tc-alert" id="registerAlert" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER: pie de página global -->
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>© Triada Cognitiva 2025 — Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+</body>
+</html>

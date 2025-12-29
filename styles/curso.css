@@ -1,0 +1,468 @@
+/***************************************************************************************************
+ * styles/curso.css
+ * - Estilos específicos de la página/componente.
+ * - Mantiene coherencia con tokens/variables definidos en main.css (:root).
+ ***************************************************************************************************/
+
+/* =========================================================
+   CURSO (detalle) — estilo consistente con tu diseño
+========================================================= */
+
+/* Bloque: tc-course-page */
+.tc-course-page{
+  background: var(--bg, #f6f8fc);
+}
+
+/* TOP */
+/* Bloque: tc-course-top */
+.tc-course-top{
+  padding: 22px 0 10px;
+}
+
+/* Bloque: tc-course-top__grid */
+.tc-course-top__grid{
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: clamp(18px, 3vw, 28px);
+  align-items: start;
+}
+
+/* MEDIA (izquierda) */
+/* Bloque: tc-course-media__frame */
+.tc-course-media__frame{
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(11,18,32,.10);
+  background: #0b1220;
+  min-height: clamp(320px, 36vw, 520px);
+}
+
+.tc-course-media__frame img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  filter: saturate(1.02);
+}
+
+/* Bloque: tc-course-media__shade */
+.tc-course-media__shade{
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(1200px 400px at 25% 15%, rgba(255,255,255,.10), transparent 60%),
+              linear-gradient(180deg, rgba(11,18,32,.15), rgba(11,18,32,.55));
+  pointer-events: none;
+}
+
+/* Bloque: tc-course-badges */
+.tc-course-badges{
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  z-index: 2;
+}
+
+/* Bloque: tc-badge */
+.tc-badge{
+  background: rgba(255,255,255,.92);
+  color: #0b1b3a;
+  border: 1px solid rgba(11,18,32,.08);
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  box-shadow: 0 12px 30px rgba(11,18,32,.10);
+}
+
+/* SUMMARY (derecha) */
+/* Bloque: tc-course-summary */
+.tc-course-summary{
+  position: sticky;
+  top: 112px; /* ajusta si tu navbar cambia */
+  background: #fff;
+  border-radius: 22px;
+  padding: 22px 22px 18px;
+  box-shadow: 0 18px 50px rgba(11,18,32,.10);
+  border: 1px solid rgba(11,18,32,.06);
+}
+
+/* Bloque: tc-kicker */
+.tc-kicker{
+  letter-spacing: .12em;
+  font-weight: 800;
+  font-size: 12px;
+  color: rgba(11,18,32,.55);
+  margin: 0 0 10px;
+}
+
+/* Bloque: tc-course-title */
+.tc-course-title{
+  margin: 0 0 10px;
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.06;
+  color: #0b1b3a;
+}
+
+/* Bloque: tc-course-subtitle */
+.tc-course-subtitle{
+  margin: 0 0 16px;
+  color: rgba(11,18,32,.68);
+  line-height: 1.5;
+}
+
+/* price */
+/* Bloque: tc-course-price */
+.tc-course-price{
+  padding: 14px 14px;
+  background: linear-gradient(180deg, rgba(15,38,92,.05), rgba(15,38,92,.02));
+  border: 1px solid rgba(11,18,32,.06);
+  border-radius: 16px;
+  margin-bottom: 14px;
+}
+
+/* Bloque: tc-course-price__row */
+.tc-course-price__row{
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+/* Bloque: tc-course-price__old */
+.tc-course-price__old{
+  color: rgba(11,18,32,.45);
+  text-decoration: line-through;
+  font-size: 22px;
+  display: none;
+}
+
+/* Bloque: tc-course-price__now */
+.tc-course-price__now{
+  font-weight: 900;
+  font-size: 34px;
+  color: #0b63ff; /* tono similar al ejemplo, puedes usar tu azul */
+}
+
+/* Bloque: tc-course-price__hint */
+.tc-course-price__hint{
+  margin-top: 6px;
+  color: rgba(11,18,32,.55);
+  font-size: 13px;
+}
+
+/* buttons (aprovecha tus .btn del main.css si existen) */
+/* Bloque: tc-course-cta */
+.tc-course-cta{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0 14px;
+}
+
+.tc-course-cta .btn{
+  border-radius: 999px;
+}
+
+/* mini cards */
+/* Bloque: tc-course-mini */
+.tc-course-mini{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* Bloque: tc-mini-card */
+.tc-mini-card{
+  border: 1px solid rgba(11,18,32,.08);
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px 12px;
+  box-shadow: 0 10px 30px rgba(11,18,32,.06);
+}
+
+/* Bloque: tc-mini-label */
+.tc-mini-label{
+  display: block;
+  font-size: 12px;
+  color: rgba(11,18,32,.55);
+  margin-bottom: 6px;
+}
+
+.tc-mini-card strong{
+  color: #0b1b3a;
+  font-size: 15px;
+}
+
+/* in-page nav */
+/* Bloque: tc-course-nav */
+.tc-course-nav{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(11,18,32,.08);
+}
+
+/* Bloque: tc-course-nav__link */
+.tc-course-nav__link{
+  font-weight: 700;
+  color: rgba(11,18,32,.75);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.08);
+  background: rgba(11,18,32,.02);
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.tc-course-nav__link:hover{
+  transform: translateY(-1px);
+  background: rgba(11,18,32,.04);
+  border-color: rgba(11,18,32,.16);
+}
+
+/* CONTENT */
+/* Bloque: tc-course-content */
+.tc-course-content{
+  padding: 16px 0 46px;
+}
+
+/* Bloque: tc-course-content__grid */
+.tc-course-content__grid{
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: clamp(18px, 3vw, 28px);
+  align-items: start;
+}
+
+/* Bloque: tc-course-article */
+.tc-course-article{
+  display: grid;
+  gap: 14px;
+}
+
+/* Bloque: tc-section-card */
+.tc-section-card{
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px 18px;
+  border: 1px solid rgba(11,18,32,.06);
+  box-shadow: 0 14px 40px rgba(11,18,32,.08);
+}
+
+.tc-section-card h2{
+  margin: 0 0 10px;
+  color: #0b1b3a;
+  font-size: 22px;
+}
+
+.tc-section-card p{
+  margin: 0;
+  color: rgba(11,18,32,.72);
+  line-height: 1.7;
+}
+
+/* Bloque: tc-topics */
+.tc-topics{
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: rgba(11,18,32,.74);
+}
+
+/* Bloque: tc-course-ghost */
+.tc-course-ghost{
+    opacity: 0.6;
+}
+
+/* FAQ */
+/* Bloque: tc-faq */
+.tc-faq{
+  display: grid;
+  gap: 10px;
+}
+
+/* Bloque: tc-faq__q */
+.tc-faq__q{
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(11,18,32,.08);
+  background: rgba(11,18,32,.02);
+  border-radius: 14px;
+  padding: 14px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.tc-faq__q:hover{
+  transform: translateY(-1px);
+  background: rgba(11,18,32,.04);
+}
+
+.tc-faq__q i{
+  font-style: normal;
+  font-weight: 900;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.12);
+  background: #fff;
+}
+
+/* Bloque: tc-faq__a */
+.tc-faq__a{
+  padding: 0 8px 10px 8px;
+  color: rgba(11,18,32,.72);
+}
+
+/* ERROR */
+/* Bloque: tc-course-error */
+.tc-course-error{
+  padding: 24px 0 56px;
+}
+
+/* Bloque: tc-course-error__box */
+.tc-course-error__box{
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(11,18,32,.06);
+  box-shadow: 0 14px 40px rgba(11,18,32,.08);
+}
+
+/* Reveal animation */
+/* Bloque: tc-reveal */
+.tc-reveal{
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.tc-reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hidden{ display: none !important; }
+
+/* Responsive */
+@media (max-width: 980px){
+  .tc-course-top__grid,
+/* Bloque: tc-course-content__grid */
+  .tc-course-content__grid{
+    grid-template-columns: 1fr;
+  }
+
+/* Bloque: tc-course-summary */
+  .tc-course-summary{
+    position: relative;
+    top: auto;
+  }
+
+/* Bloque: tc-course-mini */
+  .tc-course-mini{
+    grid-template-columns: 1fr;
+  }
+
+/* Bloque: tc-course-media__frame */
+  .tc-course-media__frame{
+    min-height: 320px;
+  }
+}
+
+/* =========================================
+   Curso — CTAs compactos (WhatsApp / Volver)
+   ========================================= */
+
+/* Bloque: tc-course-actions */
+.tc-course-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+/* Bloque: tc-action */
+.tc-action{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  font-weight: 900;
+  font-size: .95rem;
+  letter-spacing: -0.01em;
+
+  border: 1px solid rgba(11,18,32,.12);
+  background: rgba(255,255,255,.92);
+  color: var(--tc-navy);
+
+  box-shadow: 0 10px 24px rgba(11,18,32,.10);
+  backdrop-filter: blur(10px);
+
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease);
+}
+
+.tc-action:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(11,18,32,.14);
+  background: rgba(255,255,255,.98);
+}
+
+.tc-action:active{
+  transform: translateY(0);
+  box-shadow: 0 10px 24px rgba(11,18,32,.10);
+}
+
+.tc-action:focus-visible{
+  outline: 3px solid rgba(5,174,238,.45);
+  outline-offset: 3px;
+}
+
+/* WhatsApp */
+/* Bloque: tc-action--wa */
+.tc-action--wa{
+  border-color: rgba(37,211,102,.35);
+  background: linear-gradient(135deg, rgba(37,211,102,.16) 0%, rgba(37,211,102,.08) 100%);
+  color: #0B1220;
+}
+
+.tc-action--wa .tc-wa-ico{
+  width: 22px;
+  height: 22px;
+  display: block;
+  flex: 0 0 22px;
+}
+
+/* Volver (ghost/pro) */
+/* Bloque: tc-action--ghost */
+.tc-action--ghost{
+  border-color: rgba(4,33,90,.18);
+  background: rgba(4,33,90,.06);
+  color: var(--tc-navy);
+}
+
+/* En móvil: a ancho completo */
+@media (max-width: 640px){
+/* Bloque: tc-course-actions */
+  .tc-course-actions{ gap: 10px; }
+/* Bloque: tc-action */
+  .tc-action{ width: 100%; padding: 12px 16px; }
+}

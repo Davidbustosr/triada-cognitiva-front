@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!--
+  index.html
+  - Estructura de la página (front-end).
+  - Comentarios para explicar qué se renderiza y qué IDs/clases espera el JS.
+  - NO cambia funcionalidad.
+-->
+
+  <!-- ============================================================================================
+    01) META / CONFIG BÁSICA
+    - Charset para soportar caracteres en español (tildes, ñ, etc.)
+    - Viewport para que el sitio sea responsive en móviles
+    - Título que aparece en la pestaña del navegador
+  ============================================================================================= -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triada Cognitiva</title>
+
+  <!-- ============================================================================================
+    02) FUENTES (Google Fonts)
+    - Preconnect: mejora rendimiento (reduce latencia de conexión a Google Fonts)
+    - Carga de "Plus Jakarta Sans" (familia usada en tu CSS)
+  ============================================================================================= -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- ============================================================================================
+    03) ESTILOS
+    - Vincula el CSS principal del proyecto
+    - Importante: se mantiene exactamente igual para no alterar estilos actuales
+  ============================================================================================= -->
+  <link rel="stylesheet" href="styles/main.css" />
+
+  <!-- ============================================================================================
+    04) SCRIPTS
+    - JS principal (cargado con defer para no bloquear el render del HTML)
+    - El script se ejecuta cuando el DOM ya fue parseado
+  ============================================================================================= -->
+  <script defer src="scripts/main.js"></script>
+</head>
+
+<body>
+
+  <!-- ============================================================================================
+    05) NAVBAR (Header sticky)
+    - Contiene el header fijo/sticky:
+      1) Logo
+      2) Buscador
+      3) Acciones (login/registro/carrito)
+      4) Menú principal
+    - Las clases se usan en CSS y JS (ej: .navbar / .navbar-container / .nav-menu)
+  ============================================================================================= -->
+  <!-- NAVBAR: reutiliza la estructura del sitio para que main.css aplique estilos -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <!-- Logo de la marca (imagen) -->
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Triada Cognitiva" />
+      </div>
+
+      <!-- Buscador (input + botón) -->
+      <div class="search-bar">
+        <input type="text" placeholder="¿Qué quieres aprender?" />
+        <button><span>🔍</span></button>
+      </div>
+
+      <!-- Acciones de navegación (links rápidos) -->
+      <div class="nav-actions">
+        <a href="login.html"><strong>Iniciar Sesión</strong></a>
+        <a href="login.html#register">Regístrate</a>
+        <a href="#" class="cart-icon">🛒</a>
+      </div>
+    </div>
+
+    <!-- Menú principal (lista de enlaces) -->
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="quienes-somos.html">Quienes Somos</a></li>
+        <li><a href="#cursos"><strong>Cursos</strong></a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#docentes">docentes</a></li>
+        <li><a href="#contacto"><strong>Contacto</strong></a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+
+  <!-- ============================================================================================
+    06) HERO (Banner principal)
+    - Sección principal de portada:
+      1) Subtítulo
+      2) Título (h1)
+      3) CTA (botón: Ver todos los cursos)
+    - Clases clave: .hero-banner / .hero-content / .subtitle / .see-all-courses / .btn-see-all
+  ============================================================================================= -->
+  <section class="hero-banner" id="inicio">
+    <div class="hero-content">
+
+      <!-- Subtítulo (texto pequeño superior del hero) -->
+      <p class="subtitle">Centro de formación y capacitación</p>
+
+      <!-- Título principal (SEO + jerarquía de contenido) -->
+      <h1>
+        Un equipo experto para potenciar tu impacto profesional
+      </h1>
+
+      <!-- CTA principal (botón) -->
+      <div class="see-all-courses">
+        <a href="#" class="btn-see-all">Ver todos los cursos</a>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- ============================================================================================
+    07) INFO SLIDER (Beneficios rotativos)
+    - Slider textual con ícono, controlado por JavaScript (main.js)
+    - IDs IMPORTANTES (no se cambian):
+      #infoSliderItem  -> elemento que recibe clase de animación
+      #infoSliderIcon  -> contenedor donde JS inyecta el SVG
+      #infoSliderText  -> contenedor donde JS cambia el texto
+    - ARIA:
+      role="status" y aria-live="polite" anuncian cambios sin ser invasivos (accesibilidad)
+  ============================================================================================= -->
+  <section class="info-slider" aria-label="Beneficios">
+    <div class="info-slider__wrap">
+      <div class="info-slider__item" id="infoSliderItem" role="status" aria-live="polite">
+        <div class="info-slider__icon" id="infoSliderIcon"></div>
+        <p class="info-slider__text" id="infoSliderText"></p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ============================================================================================
+    08) SECCIÓN: ¿Por qué nos prefieren? (tc-why)
+    - Sección de valor/propuesta:
+      • Columna izquierda: contenido + lista de beneficios (cards)
+      • Columna derecha: 2 imágenes + testimonio corto
+    - Importante:
+      • .tc-reveal se usa para animaciones al hacer scroll (IntersectionObserver en main.js)
+      • Se conserva todo igual para no romper estilos ni JS
+  ============================================================================================= -->
+  <section class="tc-why section" id="por-que-triada">
+    <div class="container tc-why-grid">
+
+      <!-- Columna izquierda: texto + beneficios + CTA + indicadores -->
+      <div class="tc-why-content tc-reveal">
+        <!-- Kicker/eyebrow (texto superior pequeño) -->
+        <p class="tc-kicker">¿POR QUÉ NOS ELIGEN?</p>
+
+        <!-- Título de la sección -->
+        <h2 class="tc-title">Formación aplicada, flexible y con respaldo profesional</h2>
+
+        <!-- Texto introductorio -->
+        <p class="tc-lead">
+          Diseñamos experiencias de aprendizaje claras y utilizables en el día a día, con docentes expertos y recursos actualizados.
+        </p>
+
+        <!-- Beneficios en formato “cards” -->
+        <div class="tc-cards">
+
+          <!-- Card 1: Clases en vivo -->
+          <article class="tc-card tc-reveal">
+            <div class="tc-ico" aria-hidden="true">
+              <!-- Icono: monitor (SVG inline, hereda color con currentColor) -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 5.5C4 4.67 4.67 4 5.5 4h13C19.33 4 20 4.67 20 5.5v9C20 15.33 19.33 16 18.5 16h-13C4.67 16 4 15.33 4 14.5v-9Z" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M9 20h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M12 16v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Clases en vivo + acceso grabado</h3>
+              <p>Participa sincrónico o revisa el contenido cuando quieras.</p>
+            </div>
+          </article>
+
+          <!-- Card 2: Material descargable -->
+          <article class="tc-card tc-reveal">
+            <div class="tc-ico" aria-hidden="true">
+              <!-- Icono: documento -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 3.5h7l3 3V20.5c0 .83-.67 1.5-1.5 1.5h-9C5.67 22 5 21.33 5 20.5V5c0-.83.67-1.5 1.5-1.5Z" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M14 3.5V7h3" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M8 11h8M8 15h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Material descargable y actualizado</h3>
+              <p>PDFs, recursos y bibliografía de alta calidad.</p>
+            </div>
+          </article>
+
+          <!-- Card 3: Aprendizaje aplicado -->
+          <article class="tc-card tc-reveal">
+            <div class="tc-ico" aria-hidden="true">
+              <!-- Icono: herramienta -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M14.5 5.5a4 4 0 0 0-5.56 5.56l-5.2 5.2a1.2 1.2 0 0 0 0 1.7l1.3 1.3a1.2 1.2 0 0 0 1.7 0l5.2-5.2A4 4 0 0 0 18.5 9.5l-2.6 2.6-2-2 2.6-2.6Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Aprendizaje aplicado</h3>
+              <p>Casos reales, herramientas y práctica guiada.</p>
+            </div>
+          </article>
+
+          <!-- Card 4: Docentes -->
+          <article class="tc-card tc-reveal">
+            <div class="tc-ico" aria-hidden="true">
+              <!-- Icono: birrete -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 4 3 8.5 12 13l9-4.5L12 4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <path d="M6.5 10.2V14.5c0 1.5 3 3.5 5.5 3.5s5.5-2 5.5-3.5v-4.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M21 8.5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Docentes con experiencia</h3>
+              <p>Equipo con trayectoria en educación superior e investigación.</p>
+            </div>
+          </article>
+
+          <!-- Card 5: Certificación -->
+          <article class="tc-card tc-reveal">
+            <div class="tc-ico" aria-hidden="true">
+              <!-- Icono: certificado -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 4h10c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M8 9h8M8 12h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M14.5 16.5 16 18l1.5-1.5V14.5a2 2 0 1 0-3 0v2Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Certificación válida</h3>
+              <p>Útil para sector público y privado (según el programa).</p>
+            </div>
+          </article>
+
+          <!-- Card 6: Satisfacción -->
+          <article class="tc-card tc-reveal">
+            <div class="tc-ico" aria-hidden="true">
+              <!-- Icono: estrella -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3.8 14.4 9l5.6.8-4 3.9.9 5.6L12 16.9 7.1 19.3l.9-5.6-4-3.9L9.6 9 12 3.8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <h3>Alta satisfacción</h3>
+              <p>Recomendado por profesionales del área psicosocial y educación.</p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- CTA (llamados a la acción) -->
+        <div class="tc-cta-row tc-reveal">
+          <a href="cursos.html" class="btn-see-all">Ver los cursos</a>
+          <a href="#contacto" class="tc-link">Hablar con nosotros →</a>
+        </div>
+
+        <!-- Indicadores / “prueba” (números) -->
+        <div class="tc-proof tc-reveal" aria-label="Indicadores">
+          <div class="tc-proof-item">
+            <strong data-count="230">230</strong>
+            <span>alumnos</span>
+          </div>
+          <div class="tc-proof-item">
+            <strong data-count="2022">2022</strong>
+            <span>fundado</span>
+          </div>
+          <div class="tc-proof-item">
+            <strong data-count="100">100%</strong>
+            <span>online</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna derecha: imágenes + mini testimonio -->
+      <aside class="tc-why-media tc-reveal" aria-label="Imágenes representativas">
+
+        <!-- Grid de media (2 imágenes) -->
+        <div class="tc-media-grid">
+
+          <!-- Imagen principal (badge + overlay) -->
+          <div class="tc-media-box">
+            <img
+              src="/assets/images/clase2.jpg"
+              alt="Clases y formación profesional"
+              loading="lazy"
+            />
+            <div class="tc-media-overlay" aria-hidden="true"></div>
+
+            <div class="tc-media-badge">
+              <span class="tc-dot"></span>
+              <span>Clases sincrónicas + acceso diferido</span>
+            </div>
+          </div>
+
+          <!-- Segunda imagen (variante más pequeña) -->
+          <div class="tc-media-box tc-media-box--small">
+            <img
+              src="/assets/images/clase1.jpg"
+              alt="Participación y aprendizaje práctico"
+              loading="lazy"
+            />
+            <div class="tc-media-overlay" aria-hidden="true"></div>
+
+            <div class="tc-media-badge">
+              <span class="tc-dot"></span>
+              <span>Recursos y material actualizado</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Testimonio corto (cita) -->
+        <div class="tc-quote">
+          <p>“Contenido aplicable y docentes excelentes. Me ayudó a mejorar mi práctica profesional.”</p>
+          <span>— Participante</span>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+
+
+  <!-- ============================================================================================
+  SECCIÓN: CURSOS DESTACADOS (3 cards)
+  - Imagen + meta + precio + CTA
+  - Animación reveal + tilt (controlado por JS)
+============================================================================================= -->
+<section class="featured-courses section" id="cursos-destacados" aria-label="Cursos destacados">
+  <div class="container">
+
+    <header class="fc-head fc-reveal" style="--d: 0ms;">
+      <p class="fc-kicker">CURSOS DESTACADOS</p>
+      <h2 class="fc-title">Empieza con programas diseñados para aplicar desde el día 1</h2>
+      <p class="fc-subtitle">Seleccionamos 3 cursos con alta demanda y enfoque práctico.</p>
+    </header>
+
+    <div class="fc-grid">
+
+      <!-- Card 01 -->
+      <article class="fc-card fc-reveal" style="--d: 60ms;">
+        <a class="fc-media" href="curso.html?id=funciones-ejecutivas" aria-label="Ver curso Funciones Ejecutivas">
+          <img src="assets/images/curso-destacado-1.png" alt="Curso de Funciones Ejecutivas" loading="lazy">
+          <span class="fc-badge">Online · Asincrónico</span>
+        </a>
+
+        <div class="fc-body">
+          <h3 class="fc-name">Curso de Funciones Ejecutivas</h3>
+          <p class="fc-desc">Estrategias claras para intervenir en aula y mejorar el desempeño escolar.</p>
+
+          <div class="fc-meta" aria-label="Características del curso">
+            <span class="fc-pill">⏱ 30 horas</span>
+            <span class="fc-pill">📄 Material descargable</span>
+            <span class="fc-pill">🎓 Certificación</span>
+          </div>
+
+          <div class="fc-foot">
+            <div class="fc-price" aria-label="Precio">
+              <span class="fc-price-now">$20.000</span>
+              <span class="fc-price-old">$25.000</span>
+              <span class="fc-off">-20%</span>
+            </div>
+
+            <a class="fc-cta" href="curso.html?id=funciones-ejecutivas">Ver curso →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 02 -->
+      <article class="fc-card fc-reveal" style="--d: 120ms;">
+        <a class="fc-media" href="curso.html?id=neurodesarrollo" aria-label="Ver curso Neurodesarrollo">
+          <img src="assets/images/curso-destacado-2.png" alt="Curso de Neurodesarrollo" loading="lazy">
+          <span class="fc-badge fc-badge--new">Nuevo</span>
+        </a>
+
+        <div class="fc-body">
+          <h3 class="fc-name">Neurodesarrollo en el Aula</h3>
+          <p class="fc-desc">Comprende hitos, señales de alerta e intervenciones basadas en evidencia.</p>
+
+          <div class="fc-meta" aria-label="Características del curso">
+            <span class="fc-pill">⏱ 24 horas</span>
+            <span class="fc-pill">🧠 Casos reales</span>
+            <span class="fc-pill">💬 Soporte</span>
+          </div>
+
+          <div class="fc-foot">
+            <div class="fc-price" aria-label="Precio">
+              <span class="fc-price-now">$18.000</span>
+              <span class="fc-price-old">$22.000</span>
+              <span class="fc-off">-18%</span>
+            </div>
+
+            <a class="fc-cta" href="curso.html?id=neurodesarrollo">Ver curso →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 03 -->
+      <article class="fc-card fc-reveal" style="--d: 180ms;">
+        <a class="fc-media" href="curso.html?id=autismo" aria-label="Ver curso Autismo">
+          <img src="assets/images/curso-destacado-3.png" alt="Curso de Autismo" loading="lazy">
+          <span class="fc-badge">Alta demanda</span>
+        </a>
+
+        <div class="fc-body">
+          <h3 class="fc-name">Autismo: Evaluación e Intervención</h3>
+          <p class="fc-desc">Herramientas prácticas para evaluación y apoyo en contextos educativos.</p>
+
+          <div class="fc-meta" aria-label="Características del curso">
+            <span class="fc-pill">⏱ 28 horas</span>
+            <span class="fc-pill">🧩 Estrategias ABA</span>
+            <span class="fc-pill">📚 Bibliografía</span>
+          </div>
+
+          <div class="fc-foot">
+            <div class="fc-price" aria-label="Precio">
+              <span class="fc-price-now">$23.000</span>
+              <span class="fc-price-old">$29.000</span>
+              <span class="fc-off">-21%</span>
+            </div>
+
+            <a class="fc-cta" href="curso.html?id=autismo">Ver curso →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="fc-bottom fc-reveal" style="--d: 240ms;">
+      <a class="fc-all" href="cursos.html">Ver todos los cursos</a>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- ============================================================================================
+    09) TESTIMONIOS (Ticker continuo full-width)
+    - Header centrado en ancho del sitio
+    - Carrusel tipo “ticker” que se mueve solo (controlado por JS en main.js)
+    - IDs IMPORTANTES:
+      #testiViewport -> contenedor/ventana (full width)
+      #testiTrack    -> pista que se duplica y se anima
+    - La estructura se mantiene igual para no romper el ticker ni el CSS
+  ============================================================================================= -->
+  <section class="testimonials-section" id="testimonios">
+    <div class="testimonials-inner">
+      <div class="testimonials-header">
+        <span>TESTIMONIOS</span>
+        <h2>Esto es lo que dicen quienes confiaron en nosotros</h2>
+      </div>
+    </div>
+
+    <div class="testimonials-viewport" id="testiViewport">
+      <div class="testimonials-track" id="testiTrack">
+
+        <!-- Card testimonio 1 -->
+        <article class="testimonial-card">
+          <h3>Ana María González Mundaca</h3>
+          <p class="role">Psicóloga</p>
+          <p class="message">La metodología es muy clara y enriquecedora. La experiencia fue excelente y aplicable a mi labor clínica.</p>
+        </article>
+
+        <!-- Card testimonio 2 -->
+        <article class="testimonial-card">
+          <h3>Bárbara Lara</h3>
+          <p class="role">Estudiante Trabajo Social</p>
+          <p class="message">Excelente curso, muy útil y con retroalimentación constante. ¡Lo recomiendo!</p>
+        </article>
+
+        <!-- Card testimonio 3 -->
+        <article class="testimonial-card">
+          <h3>Benjamín Muñoz</h3>
+          <p class="role">Psicólogo Clínico</p>
+          <p class="message">Me ayudó a crecer profesionalmente y entender nuevos enfoques terapéuticos.</p>
+        </article>
+
+        <!-- Card testimonio 4 -->
+        <article class="testimonial-card">
+          <h3>Marcela Suárez</h3>
+          <p class="role">Educadora Diferencial</p>
+          <p class="message">Los contenidos están bien actualizados y son muy aplicables.</p>
+        </article>
+
+        <!-- Card testimonio 5 -->
+        <article class="testimonial-card">
+          <h3>Diego Contreras</h3>
+          <p class="role">Psicólogo Infantil</p>
+          <p class="message">Buena experiencia, material útil y profesores con alto nivel.</p>
+        </article>
+
+        <!-- Card testimonio 6 -->
+        <article class="testimonial-card">
+          <h3>Paula González</h3>
+          <p class="role">Neuropsicóloga</p>
+          <p class="message">Gran contenido, didáctica clara y valoración profesional excelente.</p>
+        </article>
+
+        <!-- Card testimonio 7 -->
+        <article class="testimonial-card">
+          <h3>Valentina Rojas</h3>
+          <p class="role">Psicóloga Clínica</p>
+          <p class="message">Muy recomendable, aprendí herramientas que uso todos los días.</p>
+        </article>
+
+        <!-- Card testimonio 8 -->
+        <article class="testimonial-card">
+          <h3>Laura Espinoza</h3>
+          <p class="role">Psicóloga Educacional</p>
+          <p class="message">Se ajusta a mis tiempos y necesidades académicas. Excelente plataforma.</p>
+        </article>
+
+        <!-- Card testimonio 9 -->
+        <article class="testimonial-card">
+          <h3>Matías Pérez</h3>
+          <p class="role">Terapeuta Ocupacional</p>
+          <p class="message">Aprendí herramientas prácticas para mi trabajo diario. Muy satisfecho.</p>
+        </article>
+
+      </div>
+      <!-- CTA principal (botón) -->
+      <div class="see-all-courses">
+        <a href="#" class="btn-see-all">Ver todos los cursos</a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ============================================================================================
+    10) DOCENTES (Grid)
+    - Sección de presentación del equipo docente:
+      • Título
+      • Grid responsive de cards
+    - Nota: se mantiene la estructura para no romper estilos del grid
+  ============================================================================================= -->
+  <section class="docentes-section" id="docentes">
+    <div class="container">
+      <h2>Conoce nuestros docentes</h2>
+
+      <div class="docentes-grid">
+
+        <!-- Docente 1 -->
+        <div class="docente-card">
+          <img src="assets/images/docente1.png" alt="Docente 1">
+          <h4>Francisco Ahumada Méndez</h4>
+          <p>Psicólogo, U. Católica del Maule, Chile. Doctor en Psicología, U. Católica del Maule, Chile. Máster en Metodología de la Investigación, U. de Talca, Chile. Diplomado en Neuropsicología y Neuropsiquiatría, Pontificia Universidad Católica de Chile. Especializado en neurociencia afectiva, evaluación neuropsicológica infantil y adulto. Superior.</p>
+        </div>
+
+        <!-- Docente 2 -->
+        <div class="docente-card">
+          <img src="assets/images/docente2.png" alt="Docente 2">
+          <h4>Katherine Morgado Gallardo</h4>
+          <p>Psicólogo, U. Católica del Maule, Chile. Mágíster en Neuropsicología, U. Mayor, Chile. Magíster en Neuropsicología Infantil en Itaca, España. Máestría en Aprendizaje , Cognición y Desarrollo Educativo, U. Internacional de La Rioja, España. Especializado en Neuropsicología, Neurociencias aplicadas a educación, estimulación cognitiva y funcionaes ejecutivas.<br>Docente de Educación Supeior.</p>
+        </div>
+
+        <!-- Docente 3 (nota: nombre repetido como viene en tu contenido; se deja tal cual) -->
+        <div class="docente-card">
+          <img src="assets/images/docente3.png" alt="Docente 3">
+          <h4>Katherine Morgado Gallardo</h4>
+          <p>Psicóloga, U. de la Serena, Chile. Máster en Gestión Educacional, U. Andrés Bello, Chile. Diplomada en Neuropsicología, Pontificia Universidad Católica de Chile. Especializada en diagnóstico en Autismo, evaluación neuropsicológica y psicología educacional. </p>
+        </div>
+
+        <!-- Docente 4 -->
+        <div class="docente-card">
+          <img src="assets/images/docente4.png" alt="Docente 4">
+          <h4>Priscilla Rojas Deik</h4>
+          <p>Educadora Diferencial, Psicóloga, especializada en dificultades del aprendizaje.</p>
+        </div>
+
+        <!-- Docente 5 -->
+        <div class="docente-card">
+          <img src="assets/images/docente5.png" alt="Docente 5">
+          <h4>Pablo Molina Muñoz</h4>
+          <p>Psicólogo, U. Católica del Maule, Chile. Máster en Política y Gestión Educacional, U. de Talca, Chile. Diplomado en Neuropsicología, Pontifica Universidad Católica del Chile. Relator WISC-V, WAIS-IV, ABAS-II, ICAP. Especializado en evaluación neuropsicológica, pruebas psicométricas y psicología educacional. <br>Docente de Educación Superior</p>
+        </div>
+
+        <!-- Docente 6 -->
+        <div class="docente-card">
+          <img src="assets/images/docente6.png" alt="Docente 6">
+          <h4>Natalia Uribe Ortiz</h4>
+          <p>Psicóloga, U. Católica del Maule. Máster en Psicología Clínica, Pontificia Universidad Católica de Chile. Especializada en Psicoterapia. Académica Escuela de Psicología Universidad de Talca.. Más de 16 años de experiencia laboral y académica.</p>
+        </div>
+
+        <!-- Docente 7 -->
+        <div class="docente-card">
+          <img src="assets/images/docente7.png" alt="Docente 7">
+          <h4>José Antonio Sazo Ávila</h4>
+          <p>Fonoaudiólogo, U. de Talca, Chile. Doctorando en Fonoaudiología, U. del Museo Social Argentino. Máster en Psicopedagogía, U. Católica del Maule, Chile. Especializado en intervención temprana de los trastornos del neurodesarrollo. Intervención en Autistmo mediante técnicas ABA, JASPER, NDBI y DENVER.<br> Docente de Educación Superior.</p>
+        </div>
+
+        <!-- Docente 8 (placeholder) -->
+        <div class="docente-card">
+          <img src="assets/images/docente8.png" alt="Docente 8">
+          <h4>Nombre Docente 8</h4>
+          <p>Resumen profesional breve del docente número 8.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================================
+  FAQ (Preguntas Frecuentes)
+  - Acordeón animado
+  - Accesible (aria-expanded, aria-controls)
+============================================================================================= -->
+<section class="tc-faq section" id="faq" aria-label="Preguntas frecuentes">
+  <div class="container tc-faq-grid">
+
+    <!-- Columna izquierda: título + texto -->
+    <header class="tc-faq-head tc-reveal">
+      <p class="tc-kicker">PREGUNTAS FRECUENTES</p>
+      <h2 class="tc-title">Resolvemos tus dudas antes de que te inscribas</h2>
+      <p class="tc-lead">
+        Aquí encontrarás respuestas rápidas sobre modalidad, certificación, acceso a clases y pagos.
+        Si no encuentras lo que buscas, escríbenos y te ayudamos.
+      </p>
+
+      <div class="tc-faq-cta tc-reveal">
+        <a href="#contacto" class="btn-see-all">Hablar con nosotros</a>
+        <a href="#cursos" class="tc-link">Ver cursos →</a>
+      </div>
+    </header>
+
+    <!-- Columna derecha: acordeón -->
+    <div class="tc-faq-list tc-reveal" role="list">
+
+      <article class="tc-faq-item" role="listitem">
+        <button class="tc-faq-q" type="button" aria-expanded="false" aria-controls="faqA1" id="faqQ1">
+          <span>¿Las clases quedan grabadas?</span>
+          <span class="tc-faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="tc-faq-a" id="faqA1" role="region" aria-labelledby="faqQ1">
+          <div class="tc-faq-a__inner">
+            Sí. Tendrás acceso a la grabación para revisar el contenido cuando lo necesites, dentro del período de acceso del programa.
+          </div>
+        </div>
+      </article>
+
+      <article class="tc-faq-item" role="listitem">
+        <button class="tc-faq-q" type="button" aria-expanded="false" aria-controls="faqA2" id="faqQ2">
+          <span>¿Entregan certificado?</span>
+          <span class="tc-faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="tc-faq-a" id="faqA2" role="region" aria-labelledby="faqQ2">
+          <div class="tc-faq-a__inner">
+            Sí. Al finalizar, obtienes certificado de participación (y/o acreditación según el programa), válido para uso profesional.
+          </div>
+        </div>
+      </article>
+
+      <article class="tc-faq-item" role="listitem">
+        <button class="tc-faq-q" type="button" aria-expanded="false" aria-controls="faqA3" id="faqQ3">
+          <span>¿Puedo pagar con transferencia o cuotas?</span>
+          <span class="tc-faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="tc-faq-a" id="faqA3" role="region" aria-labelledby="faqQ3">
+          <div class="tc-faq-a__inner">
+            Depende del curso. Normalmente aceptamos medios online y, en algunos casos, transferencia. Escríbenos para ver opciones.
+          </div>
+        </div>
+      </article>
+
+      <article class="tc-faq-item" role="listitem">
+        <button class="tc-faq-q" type="button" aria-expanded="false" aria-controls="faqA4" id="faqQ4">
+          <span>¿Necesito conocimientos previos?</span>
+          <span class="tc-faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="tc-faq-a" id="faqA4" role="region" aria-labelledby="faqQ4">
+          <div class="tc-faq-a__inner">
+            No siempre. Cada programa indica requisitos. Muchos cursos están diseñados para aplicarse de inmediato en la práctica.
+          </div>
+        </div>
+      </article>
+
+      <article class="tc-faq-item" role="listitem">
+        <button class="tc-faq-q" type="button" aria-expanded="false" aria-controls="faqA5" id="faqQ5">
+          <span>¿Cómo accedo al contenido después de inscribirme?</span>
+          <span class="tc-faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="tc-faq-a" id="faqA5" role="region" aria-labelledby="faqQ5">
+          <div class="tc-faq-a__inner">
+            Recibirás instrucciones por correo y podrás ingresar a tu panel para ver clases, materiales y enlaces en un solo lugar.
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================================================
+  CONTACTO
+  - WhatsApp directo
+  - Enviar correo (mailto) + formulario
+============================================================================================= -->
+<section class="tc-contact section" id="contacto" aria-label="Contacto">
+  <div class="container tc-contact-grid">
+
+    <!-- Columna izquierda: texto + acciones -->
+    <header class="tc-contact-head tc-reveal">
+      <p class="tc-kicker">CONTACTO</p>
+      <h2 class="tc-title">¿Hablamos?</h2>
+      <p class="tc-lead">
+        Escríbenos por WhatsApp para respuesta rápida o envíanos un correo con tu consulta.
+        Te orientamos para elegir el programa ideal.
+      </p>
+
+      <div class="tc-contact-actions tc-reveal">
+        <!-- WhatsApp: cambia el número (formato internacional sin +, sin espacios) -->
+        <a
+          class="tc-contact-btn tc-contact-btn--wa"
+          href="https://wa.me/56991396853?text=Hola%20Triada%20Cognitiva%2C%20quisiera%20hacer%20una%20consulta."
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="tc-contact-ico" aria-hidden="true">💬</span>
+          <span>
+            <strong>WhatsApp</strong>
+            <small>Respuesta rápida</small>
+          </span>
+        </a>
+
+        <!-- Email: cambia el correo -->
+        <a class="tc-contact-btn tc-contact-btn--mail" href="mailto:contacto@triadacognitiva.com?subject=Consulta%20Triada%20Cognitiva&body=Hola%20Triada%20Cognitiva%2C%20quisiera%20consultar%20por%3A%0A%0A">
+          <span class="tc-contact-ico" aria-hidden="true">✉️</span>
+          <span>
+            <strong>Correo</strong>
+            <small>contacto@triadacognitiva.com</small>
+          </span>
+        </a>
+      </div>
+
+      <!-- Mini “info” -->
+      <div class="tc-contact-mini tc-reveal" aria-label="Información de contacto">
+        <div class="tc-mini-item">
+          <strong>Horario</strong>
+          <span>Lun a Vie · 09:00–18:00</span>
+        </div>
+        <div class="tc-mini-item">
+          <strong>Ubicación</strong>
+          <span>Talca, Chile · Online</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Columna derecha: formulario (envía por mailto, sin backend) -->
+    <div class="tc-contact-card tc-reveal">
+      <h3 class="tc-contact-card__title">Envíanos tu mensaje</h3>
+      <p class="tc-contact-card__subtitle">
+        Completa el formulario y se abrirá tu correo listo para enviar (sin perder el diseño).
+      </p>
+
+      <form class="tc-contact-form" id="tcContactForm" novalidate>
+        <div class="tc-field">
+          <label for="tcName">Nombre</label>
+          <input id="tcName" name="name" type="text" placeholder="Tu nombre" required />
+        </div>
+
+        <div class="tc-field">
+          <label for="tcEmail">Correo</label>
+          <input id="tcEmail" name="email" type="email" placeholder="tu@correo.com" required />
+        </div>
+
+        <div class="tc-field">
+          <label for="tcTopic">Motivo</label>
+          <select id="tcTopic" name="topic" required>
+            <option value="" selected disabled>Selecciona una opción</option>
+            <option value="Cursos">Cursos</option>
+            <option value="Diplomados">Diplomados</option>
+            <option value="Certificación">Certificación</option>
+            <option value="Pagos">Pagos</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="tc-field">
+          <label for="tcMsg">Mensaje</label>
+          <textarea id="tcMsg" name="message" rows="5" placeholder="Cuéntanos tu consulta..." required></textarea>
+        </div>
+
+        <div class="tc-contact-form__row">
+          <button class="tc-send-btn" type="submit">
+            Enviar por correo
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <a
+            class="tc-whatsapp-link"
+            href="https://wa.me/56957253424?text=Hola%20Triada%20Cognitiva%2C%20quisiera%20hacer%20una%20consulta."
+            target="_blank"
+            rel="noopener"
+          >
+            Prefiero WhatsApp
+          </a>
+        </div>
+
+        <p class="tc-form-note" id="tcContactNote" aria-live="polite"></p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- WhatsApp Floating Button -->
+<a
+  class="tc-wa-float"
+  href="https://wa.me/56991396853?text=Hola%20Triada%20Cognitiva.%20Me%20gustar%C3%ADa%20hacer%20una%20consulta."
+  target="_blank"
+  rel="noopener"
+  aria-label="Comunícate con nosotros por WhatsApp"
+>
+  <span class="tc-wa-float__icon" aria-hidden="true">
+    <svg viewBox="0 0 32 32" width="18" height="18" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M19.11 17.53c-.28-.14-1.64-.81-1.9-.9-.26-.1-.45-.14-.64.14-.19.28-.73.9-.9 1.09-.16.19-.33.21-.61.07-.28-.14-1.19-.44-2.27-1.41-.84-.75-1.41-1.68-1.57-1.96-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.49.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.64-1.54-.88-2.11-.23-.55-.47-.47-.64-.48l-.55-.01c-.19 0-.49.07-.75.35-.26.28-.98.96-.98 2.34 0 1.38 1 2.71 1.14 2.9.14.19 1.97 3.01 4.78 4.22.67.29 1.19.46 1.6.59.67.21 1.27.18 1.75.11.53-.08 1.64-.67 1.87-1.32.23-.65.23-1.21.16-1.32-.07-.12-.26-.19-.54-.33z"/>
+      <path fill="currentColor" d="M16.04 4C9.39 4 4 9.39 4 16.04c0 2.12.55 4.19 1.6 6.02L4 28l6.1-1.57c1.77.97 3.76 1.48 5.94 1.48C22.69 27.91 28 22.59 28 16.04 28 9.39 22.69 4 16.04 4zm0 21.71c-2.07 0-4-.6-5.63-1.64l-.4-.25-3.62.93.97-3.53-.26-.43a9.66 9.66 0 0 1-1.49-5.1c0-5.39 4.39-9.78 9.82-9.78 5.34 0 9.74 4.39 9.74 9.82 0 5.39-4.39 9.98-9.13 9.98z"/>
+    </svg>
+  </span>
+
+  <span class="tc-wa-float__text">Comunícate con nosotros</span>
+</a>
+
+
+  <!-- ============================================================================================
+    11) FOOTER (Pie de página)
+    - Contiene:
+      • Columna logo + países
+      • Links de programas
+      • Links de recursos
+      • Datos de contacto
+      • Newsletter + redes sociales
+    - Se mantiene la estructura para respetar el layout de columnas del CSS
+  ============================================================================================= -->
+  <!-- FOOTER: pie de página global -->
+  <footer class="site-footer">
+    <div class="footer-container">
+
+      <!-- Columna: marca + presencia global -->
+      <div class="footer-column footer-logo-col">
+        <img src="assets/images/logo.png" alt="Logo Triada Cognitiva" class="footer-logo">
+        <p class="footer-location-title">Estamos presentes en:</p>
+
+        <ul class="footer-locations">
+          <li>🇨🇱 Chile</li>
+          <li>🌍 Global</li>
+        </ul>
+      </div>
+
+      <!-- Columna: Programas -->
+      <div class="footer-column">
+        <h4>Programas</h4>
+        <ul class="footer-links">
+          <li><a href="#">Cursos</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna: Recursos -->
+      <div class="footer-column">
+        <h4>Recursos</h4>
+        <ul class="footer-links">
+          <li><a href="#quienes-somos">Quienes Somos</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#docentes">Docentes</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna: Contacto -->
+      <div class="footer-column">
+        <h4>Contacto</h4>
+        <p><span>📞</span> +569 9139 6853</p>
+        <p><span>✉️</span> contacto@triadacognitiva.com</p>
+        <p><span>📍</span> Calle 21 y media norte B #4794, Las Rastras, Talca</p>
+      </div>
+
+      <!-- Columna: Newsletter + redes -->
+      <div class="footer-column footer-newsletter">
+        <h4>Regístrate en nuestro newsletter</h4>
+
+        <!-- Formulario (sin acción definida; se maneja después con backend/JS si quieres) -->
+        <form class="newsletter-form">
+          <input type="text" placeholder="Nombre" required>
+          <input type="email" placeholder="Correo" required>
+          <button type="submit">Enviar</button>
+        </form>
+
+        <!-- Redes sociales (íconos como emojis por ahora) -->
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"></a>
+          <a href="#" aria-label="Instagram"></a>
+          <a href="#" aria-label="LinkedIn"></a>
+          <a href="#" aria-label="YouTube"></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Línea inferior con copyright -->
+    <div class="footer-bottom">
+      <p>© Triada Cognitiva 2025 — Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!--
+  curso.html
+  - Estructura de la página (front-end).
+  - Comentarios para explicar qué se renderiza y qué IDs/clases espera el JS.
+  - NO cambia funcionalidad.
+-->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso | Triada Cognitiva</title>
+
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/curso.css" />
+
+  <script defer src="scripts/curso.js"></script>
+</head>
+
+<body>
+  <!-- NAVBAR (reutiliza tu navbar actual) -->
+  <!-- NAVBAR: reutiliza la estructura del sitio para que main.css aplique estilos -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="Triada Cognitiva" />
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="¿Qué quieres aprender?" />
+        <button><span>🔍</span></button>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#">Iniciar Sesión</a>
+        <a href="#">Regístrate</a>
+        <a href="#" class="cart-icon">🛒</a>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="quienes-somos.html">Quienes Somos</a></li>
+        <li><a href="cursos.html"><strong>Cursos</strong></a></li>
+        <li><a href="index.html#testimonios">Testimonios</a></li>
+        <li><a href="index.html#docentes">Docentes</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL: aquí vive la sección específica de la página -->
+  <main class="tc-course-page">
+    <!-- TOP: Media + Summary -->
+    <section class="tc-course-top">
+      <div class="container tc-course-top__grid">
+        <!-- IZQUIERDA: Imagen + badges -->
+        <div class="tc-course-media tc-reveal">
+          <div class="tc-course-media__frame">
+            <img id="courseImage" src="assets/images/hero-banner.jpg" alt="Curso" />
+            <div class="tc-course-media__shade"></div>
+
+            <div class="tc-course-badges">
+              <span class="tc-badge" id="courseModality">Online</span>
+              <span class="tc-badge" id="courseDuration">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DERECHA: resumen sticky -->
+        <aside class="tc-course-summary tc-reveal">
+          <p class="tc-kicker">CURSO</p>
+          <h1 id="courseTitle" class="tc-course-title">Cargando...</h1>
+          <p id="courseSubtitle" class="tc-course-subtitle"></p>
+
+          <div class="tc-course-price">
+            <div class="tc-course-price__row">
+              <div class="tc-course-price__old" id="coursePriceOld"></div>
+              <div class="tc-course-price__now" id="coursePriceNow"></div>
+            </div>
+            <div class="tc-course-price__hint">Precio en CLP · incluye acceso según programa</div>
+          </div>
+
+          <div class="tc-course-cta">
+            <a id="courseCtaPrimary" class="btn btn-primary" href="#" rel="noopener">Hablar por WhatsApp</a>
+            <a class="tc-action tc-action--ghost" href="cursos.html">Volver al listado</a>
+          </div>
+
+          <div class="tc-course-mini">
+            <div class="tc-mini-card">
+              <span class="tc-mini-label">Modalidad</span>
+              <strong id="courseModality2">—</strong>
+            </div>
+            <div class="tc-mini-card">
+              <span class="tc-mini-label">Duración</span>
+              <strong id="courseDuration2">—</strong>
+            </div>
+            <div class="tc-mini-card">
+              <span class="tc-mini-label">Certificación</span>
+              <strong id="courseCert">Según programa</strong>
+            </div>
+          </div>
+
+          <div class="tc-course-nav">
+            <a href="#descripcion" class="tc-course-nav__link">Descripción</a>
+            <a href="#temario" class="tc-course-nav__link">Temario</a>
+            <a href="#faq" class="tc-course-nav__link">Preguntas</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CONTENT: secciones -->
+    <section class="tc-course-content">
+      <div class="container tc-course-content__grid">
+        <article class="tc-course-article">
+          <section id="descripcion" class="tc-section-card tc-reveal">
+            <h2>Descripción</h2>
+            <p id="courseDescription">—</p>
+          </section>
+
+          <section id="temario" class="tc-section-card tc-reveal">
+            <h2>Temario</h2>
+            <ul id="courseTopics" class="tc-topics"></ul>
+          </section>
+
+          <section id="faq" class="tc-section-card tc-reveal">
+            <h2>Preguntas frecuentes</h2>
+
+            <div class="tc-faq">
+              <button class="tc-faq__q" type="button" aria-expanded="false">
+                <span>¿Cómo accedo al curso?</span>
+                <i aria-hidden="true">+</i>
+              </button>
+              <div class="tc-faq__a" hidden>
+                <p>Luego de la inscripción te enviaremos instrucciones y accesos al correo registrado.</p>
+              </div>
+
+              <button class="tc-faq__q" type="button" aria-expanded="false">
+                <span>¿Entregan certificado?</span>
+                <i aria-hidden="true">+</i>
+              </button>
+              <div class="tc-faq__a" hidden>
+                <p>La certificación depende del programa. Revisa el resumen del curso o escríbenos.</p>
+              </div>
+
+              <button class="tc-faq__q" type="button" aria-expanded="false">
+                <span>¿Puedo estudiar a mi ritmo?</span>
+                <i aria-hidden="true">+</i>
+              </button>
+              <div class="tc-faq__a" hidden>
+                <p>En modalidad asincrónica puedes avanzar cuando quieras dentro del periodo definido.</p>
+              </div>
+            </div>
+          </section>
+        </article>
+
+        <!-- columna derecha vacía para respirar en desktop (el sticky ya está arriba) -->
+        <div class="tc-course-ghost" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ERROR -->
+    <section class="tc-course-error hidden" id="courseError">
+      <div class="container">
+        <div class="tc-course-error__box">
+          <h2>No encontramos este curso</h2>
+          <p>Revisa el enlace o vuelve al listado.</p>
+          <a class="btn btn-primary" href="cursos.html">Volver a cursos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer mínimo (puedes reemplazar por tu footer completo) -->
+  <!-- FOOTER: pie de página global -->
+  <footer class="site-footer">
+    <div class="footer-bottom">
+      <p>© Triada Cognitiva 2025 — Todos los derechos reservados</p>
+    </div>
+  </footer>
+</body>
+</html>

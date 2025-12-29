@@ -1,0 +1,1879 @@
+/***************************************************************************************************
+ * main.css — Triada Cognitiva (HOME)
+ * - Ordenado según el flujo real del HTML (de arriba hacia abajo)
+ * - Comentado en español (explicación clara)
+ * - Se eliminó CSS NO usado por el HTML actual (sin afectar el diseño actual)
+ * - Se corrigieron SOLO separadores/comentarios (no alteran estilos)
+ ***************************************************************************************************/
+
+
+
+/***************************************************************************************************
+ * 01) TOKENS / VARIABLES DE DISEÑO
+ * - Colores de marca, neutrales, layout, radios, sombras, motion, tipografía
+ ***************************************************************************************************/
+:root{
+  --nav-gutter: 10px; /* “aire” lateral dentro del navbar */
+
+  /* Brand */
+  --tc-navy: #012161;    /* azul principal */
+  --tc-cyan: #05AEEE;    /* celeste acento */
+  --tc-yellow:#FCC004;   /* amarillo acento */
+
+  /* Neutrals */
+  --bg: #F7F8FC;         /* fondo general del sitio */
+  --surface: #FFFFFF;    /* tarjetas / secciones en blanco */
+  --text: #0B1220;       /* texto principal */
+  --muted: #667085;      /* texto secundario */
+  --border: rgba(11,18,32,.10); /* borde suave */
+
+  /* Layout */
+  --container: 1180px;   /* ancho máximo del contenido */
+  --r-sm: 12px;          /* radio pequeño */
+  --r-md: 16px;          /* radio medio */
+  --r-lg: 22px;          /* radio grande */
+
+  /* Shadows */
+  --shadow-sm: 0 6px 18px rgba(11,18,32,.10);  /* sombra suave */
+  --shadow-md: 0 14px 40px rgba(11,18,32,.14); /* sombra más profunda */
+
+  /* Motion */
+  --ease: cubic-bezier(.2,.8,.2,1); /* curva suave “premium” */
+
+  /* Font */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+
+
+/***************************************************************************************************
+ * 02) BASE GLOBAL
+ * - html/body, contenedor, secciones, enlaces, foco accesible, títulos
+ ***************************************************************************************************/
+html{
+  font-size: 16px; /* base para rem */
+}
+
+body{
+  
+  margin: 0;                 /* elimina margen por defecto del navegador */
+  background: var(--bg);      /* fondo global */
+  color: var(--text);         /* color de texto global */
+  font-family: var(--font-sans);
+  line-height: 1.6;           /* lectura cómoda */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Contenedor con ancho controlado (se usa en tc-why, docentes, footer interno, etc.) */
+.container{
+  width: min(var(--container), calc(100% - 40px)); /* 40px total de margen lateral (20+20) */
+  margin-inline: auto;                              /* centra el contenedor */
+}
+
+/* Padding vertical consistente entre secciones “grandes” */
+.section{
+  padding: clamp(56px, 6vw, 96px) 0;
+}
+
+/* Enlaces: sin subrayado por defecto y heredan color */
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Accesibilidad: foco visible al usar teclado (Tab) */
+:focus-visible{
+  outline: 3px solid rgba(5,174,238,.45);
+  outline-offset: 3px;
+}
+
+/* Ajuste de ritmo tipográfico en títulos */
+h1,h2,h3{
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* Previene scroll horizontal por contenidos “full width” (ej: ticker 100vw) */
+html, body{
+  overflow-x: hidden;
+  width: 100%;
+}
+
+
+
+/***************************************************************************************************
+ * 03) UI BÁSICA (CTA principal del Hero)
+ * - En este HTML solo se usa: .see-all-courses y .btn-see-all
+ * - Se eliminó lo NO usado (btn-see-all2 / see-all-courses-2, etc.)
+ ***************************************************************************************************/
+.see-all-courses{
+  text-align: center; /* centra el botón */
+  margin-top: 40px;   /* separa CTA del título */
+}
+
+.btn-see-all{
+  display: inline-block;        /* permite padding como “botón” */
+
+  padding: 14px 28px;           /* tamaño del botón */
+  background-color: #ffffff;    /* fondo blanco */
+  color: #012161;               /* texto azul */
+
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 1rem;
+
+  transition: background 0.3s ease, transform 0.2s ease; /* interacción suave */
+}
+
+.btn-see-all:hover{
+  background-color: #02307A; /* azul más oscuro al hover */
+  color: #fff;               /* texto blanco al hover */
+  transform: translateY(-2px);
+}
+
+
+
+/***************************************************************************************************
+ * 04) NAVBAR (Header sticky)
+ * - Estructura usada en HTML:
+ *   .navbar -> .navbar-container -> (logo / search-bar / nav-actions)
+ *   + .nav-menu (lista horizontal)
+ * - JS: agrega/quita la clase .is-scrolled
+ ***************************************************************************************************/
+/* Navbar siempre visible */
+.navbar{
+  position: fixed;     /* <- en vez de sticky */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;       /* <- por encima de todo */
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.92);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+}
+
+/* Estado al hacer scroll (activado por JS) */
+.navbar.is-scrolled{
+  box-shadow: 0 10px 30px rgba(11,18,32,.10);
+}
+
+/* Contenedor interno del navbar */
+.navbar-container{
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+
+  padding-inline: var(--nav-gutter); /* controla el espacio lateral */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  flex-wrap: wrap; /* permite que baje en pantallas chicas */
+}
+
+/* Logo */
+.logo img{
+  height: 80px;
+}
+
+/* Buscador (input + botón) */
+.search-bar{
+  flex: 1;
+  max-width: 500px;
+
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden; /* recorta el borde redondeado */
+}
+
+.search-bar input{
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
+.search-bar button{
+  background: #4EADEA;
+  color: white;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+/* Acciones de la derecha */
+.nav-actions a{
+  margin-left: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Ícono carrito */
+.cart-icon{
+  font-size: 1.2rem;
+}
+
+/* Menú debajo del navbar */
+.nav-menu{
+  background: #fff;
+  padding: 10px 0;
+}
+
+.nav-menu ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  gap: 15px;
+}
+
+.nav-menu li a{
+  color: #333;
+  font-weight: 500;
+
+  padding: 8px 12px;
+  border-radius: 5px;
+
+  transition: background 0.2s;
+}
+
+.nav-menu li a:hover{
+  background-color: #f0f0f0;
+}
+
+
+
+/***************************************************************************************************
+ * 05) HERO (Banner principal)
+ * - HTML:
+ *   <section class="hero-banner"><div class="hero-content">...</div></section>
+ * - Incluye imagen de fondo + overlay + centrado del contenido
+ ***************************************************************************************************/
+.hero-banner{
+  position: relative;                               /* necesario para el overlay ::before */
+  border-radius: var(--r-lg);
+  overflow: hidden;                                 /* recorta overlay/imagen en bordes */
+  box-shadow: var(--shadow-md);
+
+  background-image: url("/assets/images/hero-banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Overlay encima del fondo (para legibilidad del texto) */
+.hero-banner::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background: linear-gradient(
+    135deg,
+    rgba(4,33,90,.78) 0%,
+    rgba(5,174,238,.20) 100%
+  );
+
+  z-index:0; /* el contenido va arriba (z-index:1) */
+}
+
+/* El hijo directo (.hero-content) queda por encima del overlay y centrado */
+.hero-banner > *{
+  min-height: 280px;
+  height: clamp(300px, 34vh, 420px);
+  padding: 18px 24px;
+
+  position: relative;
+  z-index:1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Contenedor interno del hero */
+.hero-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  min-height: 420px; /* mantiene “presencia” del banner */
+
+  gap: 14px; /* separa subtitle / h1 / CTA */
+}
+
+/* Título principal */
+.hero-content h1{
+  text-align: center;
+  color: #ffffff;
+
+  font-size: 50px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+
+  width: min(550px, 100%);
+  margin: 0 auto;
+}
+
+/* Subtítulo (kicker) */
+.hero-content .subtitle{
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,.88);
+  max-width: 52ch;
+}
+
+
+
+/***************************************************************************************************
+ * 06) INFO SLIDER (Beneficios rotativos)
+ * - HTML usa:
+ *   .info-slider / .info-slider__wrap / .info-slider__item / .info-slider__icon / .info-slider__text
+ * - JS usa la clase: .is-animating para disparar la animación
+ ***************************************************************************************************/
+.info-slider{
+  background: #fff;
+  border-top: 1px solid rgba(11,18,32,.06);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+  padding: 18px 0;
+}
+
+.info-slider__wrap{
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+
+  overflow: hidden; /* oculta entrada/salida del slide */
+  display: flex;
+  justify-content: center;
+}
+
+.info-slider__item{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  will-change: transform, opacity; /* performance */
+  opacity: 0;
+  transform: translateX(120%);     /* arranca fuera (derecha) */
+}
+
+.info-slider__icon{
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+
+  display: grid;
+  place-items: center;
+}
+
+.info-slider__icon svg{
+  width: 54px;
+  height: 54px;
+}
+
+.info-slider__text{
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.2;
+
+  color: #012161;
+}
+
+/* Clase que JS agrega para iniciar el ciclo */
+.info-slider__item.is-animating{
+  animation: infoSlideCycle 4.2s var(--ease) both;
+}
+
+/* Entra -> espera -> sale (total 4.2s) */
+@keyframes infoSlideCycle{
+  0%   { transform: translateX(120%);  opacity: 0; }
+  14%  { transform: translateX(0%);    opacity: 1; }
+  86%  { transform: translateX(0%);    opacity: 1; }
+  100% { transform: translateX(-120%); opacity: 0; }
+}
+
+/* Respeta preferencia del usuario (menos movimiento) */
+@media (prefers-reduced-motion: reduce){
+  .info-slider__item,
+  .info-slider__item.is-animating{
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+
+
+/***************************************************************************************************
+ * 07) SECCIÓN “¿POR QUÉ NOS ELIGEN?” (tc-why)
+ * - HTML usa todas estas clases
+ * - JS usa .tc-reveal y agrega .is-visible al entrar al viewport
+ ***************************************************************************************************/
+.tc-why{
+  background: var(--surface);
+  border-top: 1px solid rgba(11,18,32,.06);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+}
+
+.tc-why-grid{
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: clamp(22px, 4vw, 48px);
+  align-items: start;
+}
+
+.tc-kicker{
+  margin: 0 0 10px;
+  font-weight: 800;
+  font-size: .85rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(11,18,32,.55);
+}
+
+.tc-title{
+  margin: 0 0 12px;
+  font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+  line-height: 1.12;
+  color: var(--tc-navy);
+}
+
+.tc-lead{
+  margin: 0 0 22px;
+  color: var(--muted);
+  max-width: 65ch;
+}
+
+.tc-cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.tc-card{
+  display: flex;
+  gap: 12px;
+
+  padding: 16px;
+  border-radius: var(--r-lg);
+
+  border: 1px solid var(--border);
+  background: #fff;
+
+  box-shadow: 0 6px 18px rgba(11,18,32,.06);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+
+.tc-card:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.tc-ico{
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+
+  background: rgba(4,33,90,.08);
+  color: var(--tc-navy);
+}
+
+.tc-ico svg{
+  width: 22px;
+  height: 22px;
+}
+
+.tc-card h3{
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.tc-card p{
+  margin: 0;
+  font-size: .95rem;
+  color: rgba(11,18,32,.72);
+  line-height: 1.45;
+}
+
+.tc-cta-row{
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.tc-link{
+  font-weight: 700;
+  color: var(--tc-navy);
+  padding: 10px 6px;
+  border-radius: 10px;
+}
+
+.tc-link:hover{
+  background: rgba(4,33,90,.06);
+}
+
+.tc-proof{
+  margin-top: 18px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.tc-proof-item{
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  border: 1px solid var(--border);
+  background: rgba(247,248,252,.75);
+
+  min-width: 120px;
+}
+
+.tc-proof-item strong{
+  display: block;
+  font-size: 1.25rem;
+  color: var(--tc-navy);
+  line-height: 1;
+}
+
+.tc-proof-item span{
+  display: block;
+  margin-top: 6px;
+  font-size: .9rem;
+  color: rgba(11,18,32,.65);
+  text-transform: lowercase;
+}
+
+/* Columna derecha: sticky para mantener imágenes visibles mientras lees */
+.tc-why-media{
+  position: sticky;
+  top: 110px;
+}
+
+.tc-media-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.tc-media-box{
+  position: relative;
+  overflow: hidden;
+
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(11,18,32,.08);
+
+  background: #0b1220;
+  aspect-ratio: 4 / 3;
+}
+
+.tc-media-box--small{
+  aspect-ratio: 16 / 10;
+}
+
+.tc-media-box img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  transform: scale(1.02); /* leve “zoom” estético */
+}
+
+.tc-media-overlay{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(4,33,90,.55), rgba(5,174,238,.12));
+}
+
+.tc-media-badge{
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.92);
+  color: var(--tc-navy);
+  font-weight: 800;
+  font-size: .9rem;
+
+  border: 1px solid rgba(11,18,32,.10);
+  backdrop-filter: blur(8px);
+}
+
+.tc-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  background: var(--tc-cyan);
+  box-shadow: 0 0 0 4px rgba(5,174,238,.18);
+}
+
+.tc-quote{
+  margin-top: 14px;
+  padding: 16px;
+
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(11,18,32,.06);
+}
+
+.tc-quote p{
+  margin: 0 0 10px;
+  color: rgba(11,18,32,.78);
+  line-height: 1.55;
+}
+
+.tc-quote span{
+  display: block;
+  color: rgba(11,18,32,.55);
+  font-weight: 700;
+  font-size: .95rem;
+}
+
+/* Reveal (JS): estado inicial oculto */
+.tc-reveal{
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .55s var(--ease), transform .55s var(--ease);
+}
+
+/* Reveal (JS): cuando entra al viewport */
+.tc-reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive (tc-why) */
+@media (max-width: 980px){
+  .tc-why-grid{ grid-template-columns: 1fr; }
+  .tc-cards{ grid-template-columns: 1fr; }
+  .tc-why-media{ position: relative; top: auto; }
+}
+
+
+
+/***************************************************************************************************
+ * 08) TESTIMONIOS (Ticker continuo full-width)
+ * - HTML usa:
+ *   .testimonials-section / .testimonials-inner / .testimonials-header
+ *   .testimonials-viewport#testiViewport / .testimonials-track#testiTrack
+ *   .testimonial-card (+ h3/.role/.message)
+ * - JS: duplica cards dentro de #testiTrack y calcula --ticker-distance y --ticker-duration
+ ***************************************************************************************************/
+.testimonials-section{
+  background: #012161;
+  color: #fff;
+  padding: 90px 0 110px; /* alto “hero-like” de sección */
+}
+
+/* Header centrado en ancho de sitio */
+.testimonials-inner{
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  text-align: center;
+}
+
+.testimonials-header span{
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  opacity: 0.85;
+  display:block;
+  margin-bottom: 10px;
+}
+
+.testimonials-header h2{
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 800;
+  margin: 0;
+}
+
+/* Viewport full width (100vw) */
+.testimonials-viewport{
+  width: 100vw;
+  margin-left: calc(50% - 50vw); /* saca el carrusel a full ancho real */
+  margin-top: 38px;
+
+  overflow: hidden;
+  position: relative;
+
+  padding: 18px 0;
+  min-height: 220px;
+}
+
+/* Fade en bordes (izq/der) */
+.testimonials-viewport::before,
+.testimonials-viewport::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.testimonials-viewport::before{
+  left:0;
+  background: linear-gradient(to right, #012161 0%, rgba(47,48,141,0) 100%);
+}
+
+.testimonials-viewport::after{
+  right:0;
+  background: linear-gradient(to left, #012161 0%, rgba(47,48,141,0) 100%);
+}
+
+/* Track (se mueve siempre) */
+.testimonials-track{
+  display: flex;
+  align-items: stretch;
+  gap: 22px;
+  padding: 0 40px;
+
+  will-change: transform;
+  animation: testiTicker var(--ticker-duration, 28s) linear infinite;
+}
+
+/* Pausa al hover / focus */
+.testimonials-viewport:hover .testimonials-track,
+.testimonials-viewport:focus-within .testimonials-track{
+  animation-play-state: paused;
+}
+
+/* Card testimonio (tamaño responsive: 3–4 visibles) */
+.testimonial-card{
+  flex: 0 0 auto;
+  width: clamp(260px, 24vw, 360px);
+
+  background: #ffffff;
+  color: #111827;
+
+  border-radius: 18px;
+  padding: 22px;
+
+  box-shadow: 0 10px 28px rgba(0,0,0,0.16);
+  text-align: left;
+
+  /* Importante: se conserva el “lift” al hover que venía del bloque antiguo */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+.testimonial-card h3{
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: #0B1220;
+}
+
+.testimonial-card .role{
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #012161;
+  margin: 0 0 12px;
+}
+
+.testimonial-card .message{
+  font-size: 0.98rem;
+  line-height: 1.65;
+  margin: 0;
+  color: rgba(11,18,32,.78);
+}
+
+/* Recorre exactamente la mitad del track (porque JS duplica las cards 1 vez) */
+@keyframes testiTicker{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(calc(-1 * var(--ticker-distance))); }
+}
+
+@media (max-width: 640px){
+  .testimonials-track{ padding: 0 18px; }
+  .testimonials-viewport::before,
+  .testimonials-viewport::after{ width: 54px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .testimonials-track{ animation: none !important; }
+}
+
+/* =================================================================================================
+  SECCIÓN: CURSOS DESTACADOS (Featured Courses)
+  - 3 cards con imagen, meta, precio y CTA
+  - Animación reveal + hover + tilt suave (JS controla variables)
+================================================================================================= */
+
+.featured-courses{
+  background: linear-gradient(to bottom, rgba(247,248,252,.8), #fff);
+  border-top: 1px solid rgba(11,18,32,.06);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+}
+
+.fc-head{
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.fc-kicker{
+  margin: 0 0 10px;
+  font-weight: 800;
+  font-size: .85rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(11,18,32,.55);
+}
+
+.fc-title{
+  margin: 0 0 10px;
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  color: var(--tc-navy);
+  line-height: 1.12;
+}
+
+.fc-subtitle{
+  margin: 0 auto;
+  max-width: 68ch;
+  color: var(--muted);
+}
+
+/* Grid */
+.fc-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* Card */
+.fc-card{
+  --rx: 0deg;
+  --ry: 0deg;
+
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(11,18,32,.10);
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(11,18,32,.10);
+
+  overflow: hidden;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+  will-change: transform;
+}
+
+.fc-card:hover{
+  box-shadow: 0 16px 44px rgba(11,18,32,.16);
+  border-color: rgba(5,174,238,.35);
+}
+
+/* Media */
+.fc-media{
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0b1220;
+}
+
+.fc-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  transform: scale(1.03);
+  transition: transform .35s var(--ease), filter .35s var(--ease);
+  filter: saturate(1.02) contrast(1.02);
+}
+
+.fc-card:hover .fc-media img{
+  transform: scale(1.08);
+  filter: saturate(1.06) contrast(1.05);
+}
+
+/* Shine sutil (no invasivo) */
+.fc-media::after{
+  content:"";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(135deg, rgba(255,255,255,0) 40%, rgba(255,255,255,.28) 50%, rgba(255,255,255,0) 60%);
+  transform: translateX(-40%) rotate(15deg);
+  opacity: 0;
+  transition: opacity .25s var(--ease);
+}
+.fc-card:hover .fc-media::after{
+  opacity: 1;
+  animation: fcShine 1.2s var(--ease) both;
+}
+@keyframes fcShine{
+  from{ transform: translateX(-60%) rotate(15deg); }
+  to{   transform: translateX(60%) rotate(15deg); }
+}
+
+/* Badge */
+.fc-badge{
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.92);
+  color: var(--tc-navy);
+
+  font-weight: 800;
+  font-size: .88rem;
+
+  border: 1px solid rgba(11,18,32,.10);
+  backdrop-filter: blur(8px);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fc-badge--new{
+  background: rgba(252,192,4,.92);
+  border-color: rgba(252,192,4,.55);
+  color: #0B1220;
+}
+
+/* Body */
+.fc-body{
+  padding: 18px 18px 16px;
+}
+
+.fc-name{
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.fc-desc{
+  margin: 0 0 14px;
+  color: rgba(11,18,32,.72);
+  line-height: 1.55;
+}
+
+/* Pills */
+.fc-meta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.fc-pill{
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(247,248,252,.75);
+  color: rgba(11,18,32,.78);
+  font-weight: 700;
+  font-size: .86rem;
+}
+
+/* Footer */
+.fc-foot{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid rgba(11,18,32,.08);
+  padding-top: 14px;
+}
+
+.fc-price{
+  display: grid;
+  gap: 2px;
+}
+
+.fc-price-now{
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: var(--tc-navy);
+  line-height: 1.1;
+}
+
+.fc-price-old{
+  font-weight: 800;
+  font-size: .88rem;
+  color: rgba(11,18,32,.45);
+  text-decoration: line-through;
+}
+
+.fc-off{
+  font-weight: 900;
+  font-size: .85rem;
+  color: #0B1220;
+  background: rgba(5,174,238,.18);
+  border: 1px solid rgba(5,174,238,.25);
+  border-radius: 999px;
+  padding: 4px 8px;
+  width: fit-content;
+}
+
+/* CTA */
+.fc-cta{
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 900;
+  color: var(--tc-navy);
+  background: rgba(4,33,90,.06);
+  border: 1px solid rgba(4,33,90,.10);
+  transition: transform .18s var(--ease), background .18s var(--ease);
+  white-space: nowrap;
+}
+
+.fc-cta:hover{
+  background: rgba(5,174,238,.16);
+  transform: translateY(-1px);
+}
+
+/* Bottom link */
+.fc-bottom{
+  margin-top: 24px;
+  text-align: center;
+}
+
+.fc-all{
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 900;
+
+  background: var(--tc-navy);
+  color: #fff;
+
+  box-shadow: var(--shadow-sm);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease);
+}
+.fc-all:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* =======================
+   Reveal (propio de esta sección)
+   - Usa variable --d para delay (stagger)
+======================= */
+.fc-reveal{
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity .55s var(--ease),
+    transform .55s var(--ease);
+  transition-delay: var(--d, 0ms);
+}
+
+.fc-reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .fc-grid{ grid-template-columns: 1fr; }
+  .fc-foot{ flex-direction: column; align-items: flex-start; }
+  .fc-cta{ width: 100%; text-align: center; }
+}
+
+
+/***************************************************************************************************
+ * 09) DOCENTES (Grid + cards)
+ * - HTML usa:
+ *   .docentes-section / .docentes-grid / .docente-card
+ ***************************************************************************************************/
+.docentes-section{
+  background: #f7f7fc;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.docentes-section h2{
+  font-size: 2rem;
+  margin-bottom: 50px;
+  color: #012161;
+}
+
+.docentes-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 30px;
+
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.docente-card{
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.docente-card:hover{
+  transform: translateY(-6px);
+}
+
+.docente-card img{
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+  object-fit: cover;
+
+  margin-bottom: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.docente-card h4{
+  color: #2F308D;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.docente-card p{
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* =================================================================================================
+  FAQ (Preguntas frecuentes) — Acordeón moderno
+================================================================================================= */
+
+.tc-faq{
+  background: var(--bg);
+  border-top: 1px solid rgba(11,18,32,.06);
+}
+
+.tc-faq-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(22px, 4vw, 48px);
+  align-items: start;
+}
+
+.tc-faq-head{
+  position: sticky;
+  top: 110px;
+}
+
+.tc-faq-cta{
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tc-faq-list{
+  display: grid;
+  gap: 12px;
+}
+
+/* Item */
+.tc-faq-item{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: 0 10px 26px rgba(11,18,32,.06);
+  overflow: hidden;
+  transform: translateY(0);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+}
+
+.tc-faq-item:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(5,174,238,.25);
+}
+
+/* Botón pregunta */
+.tc-faq-q{
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  text-align: left;
+
+  cursor: pointer;
+
+  font-family: var(--font-sans);
+  font-weight: 800;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.tc-faq-q:focus-visible{
+  outline: 3px solid rgba(5,174,238,.35);
+  outline-offset: 3px;
+  border-radius: 14px;
+}
+
+/* Ícono (+ / x) */
+.tc-faq-icon{
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(4,33,90,.08);
+  position: relative;
+  flex: 0 0 38px;
+  transition: transform .18s var(--ease), background .18s var(--ease);
+}
+
+.tc-faq-icon::before,
+.tc-faq-icon::after{
+  content:"";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 16px;
+  height: 2px;
+  background: var(--tc-navy);
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+}
+
+.tc-faq-icon::after{
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* Respuesta (acordeón con grid trick) */
+.tc-faq-a{
+  display: grid;
+  grid-template-rows: 0fr; /* cerrado */
+  transition: grid-template-rows .28s var(--ease);
+}
+
+.tc-faq-a__inner{
+  overflow: hidden;
+  padding: 0 16px;
+  color: rgba(11,18,32,.75);
+  line-height: 1.65;
+  font-size: .98rem;
+}
+
+/* espacio al abrir */
+.tc-faq-item.is-open .tc-faq-a__inner{
+  padding: 0 16px 16px;
+}
+
+/* Abierto */
+.tc-faq-item.is-open .tc-faq-a{
+  grid-template-rows: 1fr;
+}
+
+.tc-faq-item.is-open .tc-faq-icon{
+  background: rgba(5,174,238,.14);
+  transform: rotate(45deg);
+}
+
+/* Micro animación de entrada */
+.tc-faq-item{
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.tc-faq-item.is-in{
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .45s var(--ease), transform .45s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+}
+
+@media (max-width: 980px){
+  .tc-faq-grid{ grid-template-columns: 1fr; }
+  .tc-faq-head{ position: relative; top: auto; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .tc-faq-a,
+  .tc-faq-item,
+  .tc-faq-item.is-in{
+    transition: none !important;
+  }
+}
+
+
+/***************************************************************************************************
+ * 10) FOOTER
+ * - HTML usa:
+ *   .site-footer / .footer-container / .footer-column / .footer-logo-col / .footer-logo
+ *   .footer-location-title / .footer-locations / .footer-links / .footer-newsletter
+ *   .newsletter-form / .footer-social / .footer-bottom
+ ***************************************************************************************************/
+.site-footer{
+  background: #012161;
+  color: #d1d1d9;
+
+  padding: 50px 20px 30px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  max-width: 1300px;
+  margin: 0 auto;
+
+  justify-content: space-between;
+}
+
+.footer-column{
+  flex: 1 1 180px;
+  min-width: 180px;
+}
+
+.footer-logo-col{
+  flex: 2 1 250px; /* columna de marca más ancha */
+}
+
+.footer-logo{
+  width: 170px;
+  margin-bottom: 15px;
+}
+
+.footer-location-title{
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.footer-locations{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-locations li{
+  margin: 6px 0;
+}
+
+.footer-links{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li{
+  margin: 6px 0;
+}
+
+.footer-links a{
+  color: #d1d1d9;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.footer-links a:hover{
+  color: #fff;
+}
+
+.footer-newsletter{
+  max-width: 300px;
+}
+
+.newsletter-form input{
+  width: 100%;
+  margin-bottom: 8px;
+
+  padding: 9px 12px;
+
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.newsletter-form button{
+  width: 100%;
+  padding: 9px;
+
+  background: #2F308D;
+  color: #fff;
+
+  border: none;
+  border-radius: 6px;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.newsletter-form button:hover{
+  background: #4EADEA;
+}
+
+.footer-social{
+  margin-top: 15px;
+}
+
+.footer-social a{
+  margin-right: 12px;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.footer-bottom{
+  text-align: center;
+  margin-top: 25px;
+
+  border-top: 1px solid #444559;
+  padding-top: 18px;
+
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* Responsive footer */
+@media (max-width: 900px){
+  .footer-container{
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-column{
+    flex: 1 1 100%;
+  }
+
+  .footer-newsletter{
+    max-width: 100%;
+  }
+}
+
+/***************************************************************************************************
+ * 11) AJUSTES GLOBALES ADICIONALES
+ ***************************************************************************************************/
+html{  
+  scroll-behavior: smooth;
+} 
+
+/* =================================================================================================
+  CONTACTO — WhatsApp + Correo + Formulario (sin backend)
+================================================================================================= */
+
+.tc-contact{
+  background: var(--bg);
+  border-top: 1px solid rgba(11,18,32,.06);
+}
+
+/* =========================================
+   FIX LOCAL: formulario contacto no se desborda
+========================================= */
+.tc-contact-card,
+.tc-contact-form,
+.tc-field{
+  max-width: 100%;
+}
+
+.tc-field input,
+.tc-field select,
+.tc-field textarea{
+  box-sizing: border-box;  /* <- clave */
+  max-width: 100%;
+  display: block;
+}
+
+.tc-contact-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(22px, 4vw, 48px);
+  align-items: start;
+}
+
+.tc-contact-head{
+  position: sticky;
+  top: 110px;
+}
+
+.tc-contact-actions{
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.tc-contact-btn{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 14px 14px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--surface);
+
+  box-shadow: 0 10px 26px rgba(11,18,32,.06);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+}
+
+.tc-contact-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(5,174,238,.25);
+}
+
+.tc-contact-ico{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+
+  background: rgba(4,33,90,.08);
+  color: var(--tc-navy);
+  flex: 0 0 44px;
+  font-size: 1.15rem;
+}
+
+.tc-contact-btn span{
+  display: grid;
+  line-height: 1.2;
+}
+
+.tc-contact-btn strong{
+  font-weight: 900;
+  color: var(--text);
+}
+
+.tc-contact-btn small{
+  margin-top: 4px;
+  color: rgba(11,18,32,.65);
+  font-weight: 700;
+}
+
+.tc-contact-btn--wa .tc-contact-ico{
+  background: rgba(5, 174, 238, .14);
+}
+
+.tc-contact-mini{
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tc-mini-item{
+  min-width: 220px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(247,248,252,.75);
+}
+
+.tc-mini-item strong{
+  display: block;
+  color: var(--tc-navy);
+  font-weight: 900;
+}
+
+.tc-mini-item span{
+  display: block;
+  margin-top: 6px;
+  color: rgba(11,18,32,.65);
+}
+
+/* Card formulario */
+.tc-contact-card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  padding: 18px;
+}
+
+.tc-contact-card__title{
+  margin: 0 0 6px;
+  color: var(--text);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.tc-contact-card__subtitle{
+  margin: 0 0 14px;
+  color: rgba(11,18,32,.68);
+}
+
+.tc-contact-form{
+  display: grid;
+  gap: 12px;
+}
+
+.tc-field label{
+  display: block;
+  font-weight: 900;
+  font-size: .92rem;
+  color: rgba(11,18,32,.78);
+  margin-bottom: 6px;
+}
+
+.tc-field input,
+.tc-field select,
+.tc-field textarea{
+  width: 100%;
+  font-family: var(--font-sans);
+
+  border: 1px solid rgba(11,18,32,.14);
+  border-radius: 14px;
+
+  padding: 12px 12px;
+  background: #fff;
+
+  outline: none;
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease);
+}
+
+.tc-field textarea{
+  resize: vertical;
+  min-height: 120px;
+}
+
+.tc-field input:focus,
+.tc-field select:focus,
+.tc-field textarea:focus{
+  border-color: rgba(5,174,238,.55);
+  box-shadow: 0 0 0 5px rgba(5,174,238,.18);
+}
+
+/* Estado error (JS aplica .is-error) */
+.tc-field.is-error input,
+.tc-field.is-error select,
+.tc-field.is-error textarea{
+  border-color: rgba(220, 38, 38, .55);
+  box-shadow: 0 0 0 5px rgba(220, 38, 38, .12);
+}
+
+.tc-contact-form__row{
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+/* Botón enviar */
+.tc-send-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 16px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(11,18,32,.10);
+  background: var(--tc-navy);
+  color: #fff;
+
+  font-weight: 900;
+  cursor: pointer;
+
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+}
+
+.tc-send-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+  background: #063079;
+}
+
+.tc-send-btn:active{
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.tc-whatsapp-link{
+  font-weight: 900;
+  color: var(--tc-navy);
+  padding: 10px 6px;
+  border-radius: 10px;
+}
+
+.tc-whatsapp-link:hover{
+  background: rgba(4,33,90,.06);
+}
+
+.tc-form-note{
+  margin: 2px 0 0;
+  font-weight: 800;
+  color: rgba(11,18,32,.65);
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .tc-contact-grid{ grid-template-columns: 1fr; }
+  .tc-contact-head{ position: relative; top: auto; }
+}
+
+:root{
+  --nav-offset: 150px; /* fallback */
+}
+
+/* Para cualquier sección a la que llegues por #hash */
+[id]{
+  scroll-margin-top: calc(var(--nav-offset) - 20px);
+}
+
+/* =================================================================================================
+  WhatsApp Floating Button (Bottom Left) — profesional, discreto, accesible + ANIMACIÓN
+================================================================================================= */
+
+.tc-wa-float{
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 99999;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 14px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(11,18,32,.12);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 12px 30px rgba(11,18,32,.16);
+
+  color: var(--tc-navy);
+  font-weight: 900;
+  font-size: .95rem;
+
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+
+  /* ✅ Animación profesional (pulso + micro “salto”) */
+  transform-origin: left bottom;
+  animation: tcWaPulse 2.8s var(--ease) infinite;
+}
+
+.tc-wa-float:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 44px rgba(11,18,32,.18);
+  background: rgba(255,255,255,.98);
+
+  /* ✅ Pausa al hover para no molestar */
+  animation: none;
+}
+
+.tc-wa-float:active{
+  transform: translateY(0);
+  box-shadow: 0 10px 24px rgba(11,18,32,.14);
+}
+
+.tc-wa-float:focus-visible{
+  outline: 3px solid rgba(5,174,238,.45);
+  outline-offset: 3px;
+
+  /* ✅ Pausa al focus también */
+  animation: none;
+}
+
+.tc-wa-float__icon{
+  color: #25D366; /* verde WhatsApp */
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(37, 211, 102, .16); /* tono WhatsApp suave */
+  border: 1px solid rgba(37, 211, 102, .26);
+
+  font-size: 1.15rem;
+}
+
+.tc-wa-float__icon svg{
+  display: block;
+}
+
+.tc-wa-float__text{
+  line-height: 1.1;
+}
+
+/* ✅ Keyframes: pulso suave + mini bounce */
+@keyframes tcWaPulse{
+  0%, 72%, 100%{
+    transform: translateY(0) scale(1);
+    box-shadow: 0 12px 30px rgba(11,18,32,.16);
+  }
+  80%{
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 16px 44px rgba(11,18,32,.18);
+  }
+  88%{
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* En móviles, deja solo el ícono para no tapar contenido */
+@media (max-width: 520px){
+  .tc-wa-float{
+    padding: 10px;
+  }
+  .tc-wa-float__text{
+    display: none;
+  }
+}
+
+/* Respeta preferencia de movimiento */
+@media (prefers-reduced-motion: reduce){
+  .tc-wa-float{
+    transition: none !important;
+    animation: none !important;
+  }
+}

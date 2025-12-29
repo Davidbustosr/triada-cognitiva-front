@@ -1,0 +1,446 @@
+/***************************************************************************************************
+ * styles/login.css
+ * - Estilos específicos de la página/componente.
+ * - Mantiene coherencia con tokens/variables definidos en main.css (:root).
+ ***************************************************************************************************/
+
+/* =========================================================================================
+  login.css — Acceso / Registro
+  - Diseñado para convivir con tu main.css sin romper nada.
+  - Corrige el problema del navbar fixed: usa --nav-offset calculado por login.js
+========================================================================================= */
+
+/* Bloque: tc-auth-page */
+.tc-auth-page{
+  /* offset real del navbar (calculado en JS) */
+  --nav-offset: 150px;
+}
+
+/* Espacio superior para que el navbar NO tape el contenido */
+/* Bloque: tc-auth */
+.tc-auth{
+  padding-top: calc(var(--nav-offset) + 26px);
+  padding-bottom: 70px;
+  background:
+    radial-gradient(900px 420px at 10% 20%, rgba(5,174,238,.10), transparent 60%),
+    radial-gradient(900px 420px at 90% 10%, rgba(252,192,4,.10), transparent 60%),
+    linear-gradient(to bottom, rgba(247,248,252,.9), rgba(247,248,252,.55));
+}
+
+/* Grid general */
+/* Bloque: tc-auth__grid */
+.tc-auth__grid{
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(18px, 4vw, 46px);
+  align-items: start;
+}
+
+/* -------------------- Left side (marketing) -------------------- */
+/* Bloque: tc-auth__side */
+.tc-auth__side{
+  padding: 8px 0;
+}
+
+/* Bloque: tc-auth__kicker */
+.tc-auth__kicker{
+  margin: 0 0 10px;
+  font-weight: 900;
+  font-size: .85rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(11,18,32,.55);
+}
+
+/* Bloque: tc-auth__title */
+.tc-auth__title{
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 3.2vw, 2.7rem);
+  color: var(--tc-navy);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+/* Bloque: tc-auth__lead */
+.tc-auth__lead{
+  margin: 0 0 22px;
+  color: rgba(11,18,32,.72);
+  max-width: 62ch;
+}
+
+/* Benefits cards */
+/* Bloque: tc-auth__benefits */
+.tc-auth__benefits{
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Bloque: tc-auth__benefit */
+.tc-auth__benefit{
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 12px;
+  align-items: center;
+
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 18px;
+  padding: 14px 14px;
+  box-shadow: 0 10px 26px rgba(11,18,32,.06);
+
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+}
+
+.tc-auth__benefit:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 44px rgba(11,18,32,.12);
+  border-color: rgba(5,174,238,.28);
+}
+
+/* Bloque: tc-auth__icon */
+.tc-auth__icon{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(4,33,90,.08);
+  color: var(--tc-navy);
+  font-size: 1.15rem;
+}
+
+.tc-auth__benefit strong{
+  display: block;
+  color: var(--text);
+  font-weight: 900;
+  margin-bottom: 2px;
+}
+
+.tc-auth__benefit p{
+  margin: 0;
+  color: rgba(11,18,32,.68);
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+/* WhatsApp help */
+/* Bloque: tc-auth__help */
+.tc-auth__help{
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.70);
+  box-shadow: 0 10px 26px rgba(11,18,32,.06);
+
+  color: rgba(11,18,32,.75);
+  font-weight: 800;
+
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+}
+
+.tc-auth__help:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 44px rgba(11,18,32,.12);
+  border-color: rgba(5,174,238,.28);
+}
+
+.tc-auth__helpDot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(5,174,238,.9);
+  box-shadow: 0 0 0 4px rgba(5,174,238,.18);
+}
+
+/* -------------------- Right card (form) -------------------- */
+/* Bloque: tc-auth__card */
+.tc-auth__card{
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(11,18,32,.14);
+  overflow: hidden;
+  position: relative;
+}
+
+/* decor sutil */
+.tc-auth__card::before{
+  content:"";
+  position:absolute;
+  inset:-60px -120px auto auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, rgba(5,174,238,.28), transparent 60%);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.tc-auth__cardHead{
+  padding: 18px 18px 10px;
+  border-bottom: 1px solid rgba(11,18,32,.08);
+  background: rgba(247,248,252,.70);
+}
+
+.tc-auth__cardSub{
+  margin: 10px 0 0;
+  color: rgba(11,18,32,.65);
+  font-weight: 700;
+}
+
+/* Tabs */
+/* Bloque: tc-auth__tabs */
+.tc-auth__tabs{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Bloque: tc-tab */
+.tc-tab{
+  appearance: none;
+  border: 1px solid rgba(11,18,32,.10);
+  background: #fff;
+  color: rgba(11,18,32,.75);
+  font-weight: 900;
+
+  padding: 12px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease);
+}
+
+.tc-tab:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(11,18,32,.08);
+}
+
+.tc-tab.is-active{
+  background: rgba(4,33,90,.06);
+  border-color: rgba(5,174,238,.26);
+  color: var(--tc-navy);
+}
+
+/* Panels */
+/* Bloque: tc-auth__panel */
+.tc-auth__panel{
+  display: none;
+  padding: 18px;
+}
+.tc-auth__panel.is-active{
+  display: block;
+  animation: tcPanelIn .35s var(--ease) both;
+}
+@keyframes tcPanelIn{
+  from{ opacity: 0; transform: translateY(8px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+/* Form */
+/* Bloque: tc-form */
+.tc-form{
+  display: grid;
+  gap: 12px;
+}
+
+.tc-field label{
+  display: block;
+  font-weight: 900;
+  font-size: .92rem;
+  color: rgba(11,18,32,.78);
+  margin-bottom: 6px;
+}
+
+.tc-field input{
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-sans);
+
+  border: 1px solid rgba(11,18,32,.14);
+  border-radius: 14px;
+
+  padding: 12px 12px;
+  background: #fff;
+
+  outline: none;
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease), transform .18s var(--ease);
+}
+
+.tc-field input:focus{
+  border-color: rgba(5,174,238,.55);
+  box-shadow: 0 0 0 5px rgba(5,174,238,.18);
+}
+
+.tc-field.is-error input{
+  border-color: rgba(220,38,38,.55);
+  box-shadow: 0 0 0 5px rgba(220,38,38,.12);
+}
+
+.tc-fieldMsg{
+  display: block;
+  margin-top: 6px;
+  color: rgba(220,38,38,.88);
+  font-weight: 800;
+  min-height: 18px;
+}
+
+/* Password row */
+/* Bloque: tc-pass */
+.tc-pass{
+  display: grid;
+  grid-template-columns: 1fr 52px;
+  gap: 10px;
+  align-items: center;
+}
+
+.tc-passBtn{
+  height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(11,18,32,.14);
+  background: rgba(247,248,252,.85);
+  cursor: pointer;
+  transition: transform .18s var(--ease), background .18s var(--ease);
+}
+.tc-passBtn:hover{
+  transform: translateY(-1px);
+  background: rgba(5,174,238,.12);
+}
+
+/* Row */
+/* Bloque: tc-row */
+.tc-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+/* Bloque: tc-check */
+.tc-check{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: rgba(11,18,32,.72);
+}
+.tc-check input{
+  width: 16px;
+  height: 16px;
+}
+
+/* Bloque: tc-check--terms */
+.tc-check--terms{
+  margin-top: 4px;
+}
+
+.tc-linkMini{
+  font-weight: 900;
+  color: var(--tc-navy);
+  padding: 10px 6px;
+  border-radius: 10px;
+}
+.tc-linkMini:hover{
+  background: rgba(4,33,90,.06);
+}
+
+/* Button */
+/* Bloque: tc-btn */
+.tc-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px 16px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(11,18,32,.10);
+  font-weight: 900;
+  cursor: pointer;
+
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+}
+
+/* Bloque: tc-btn--primary */
+.tc-btn--primary{
+  width: 100%;
+  background: var(--tc-navy);
+  color: #fff;
+}
+.tc-btn--primary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 34px rgba(11,18,32,.14);
+  background: #063079;
+}
+.tc-btn--primary:active{
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Switch line */
+/* Bloque: tc-auth__switch */
+.tc-auth__switch{
+  margin: 8px 0 0;
+  color: rgba(11,18,32,.70);
+  font-weight: 800;
+}
+
+.tc-linkStrong{
+  font-weight: 900;
+  color: var(--tc-navy);
+  padding: 10px 6px;
+  border-radius: 10px;
+}
+.tc-linkStrong:hover{
+  background: rgba(4,33,90,.06);
+}
+
+/* Note */
+/* Bloque: tc-note */
+.tc-note{
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(11,18,32,.08);
+  color: rgba(11,18,32,.55);
+  font-weight: 800;
+}
+
+/* Alerts */
+/* Bloque: tc-alert */
+.tc-alert{
+  margin-top: 10px;
+  min-height: 20px;
+  font-weight: 900;
+}
+.tc-alert.is-ok{ color: rgba(5, 150, 105, .95); }
+.tc-alert.is-bad{ color: rgba(220, 38, 38, .92); }
+
+/* Responsive */
+@media (max-width: 980px){
+/* Bloque: tc-auth__grid */
+  .tc-auth__grid{
+    grid-template-columns: 1fr;
+  }
+/* Bloque: tc-auth__side */
+  .tc-auth__side{
+    order: 2;
+  }
+/* Bloque: tc-auth__card */
+  .tc-auth__card{
+    order: 1;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .tc-auth__panel.is-active{ animation: none !important; }
+}

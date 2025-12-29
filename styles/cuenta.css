@@ -1,0 +1,615 @@
+/***************************************************************************************************
+ * styles/cuenta.css
+ * - Estilos específicos de la página/componente.
+ * - Mantiene coherencia con tokens/variables definidos en main.css (:root).
+ ***************************************************************************************************/
+
+/* ================================================================================================
+  cuenta.css — MI CUENTA (Triada Cognitiva)
+  - Usa variables de main.css (tc-navy, bg, surface, etc.)
+  - Layout premium, cards, tabs, estados, skeleton loading
+================================================================================================ */
+
+/* Bloque: tc-account */
+.tc-account{
+  padding-top: 120px; /* deja espacio por navbar fixed */
+}
+
+/* HERO */
+/* Bloque: tc-account-hero */
+.tc-account-hero{
+  background: linear-gradient(to bottom, rgba(247,248,252,.85), #fff);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+  padding: clamp(26px, 3vw, 44px) 0;
+}
+
+/* Bloque: tc-account-hero__inner */
+.tc-account-hero__inner{
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: clamp(18px, 4vw, 44px);
+  align-items: start;
+}
+
+/* Bloque: tc-account-title */
+.tc-account-title{
+  margin: 0 0 10px;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--tc-navy);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Bloque: tc-account-lead */
+.tc-account-lead{
+  margin: 0;
+  color: rgba(11,18,32,.70);
+  max-width: 70ch;
+}
+
+/* Quick stats */
+/* Bloque: tc-account-quick */
+.tc-account-quick{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+}
+
+/* Bloque: tc-quick-card */
+.tc-quick-card{
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 16px;
+  padding: 14px 14px;
+  box-shadow: 0 10px 24px rgba(11,18,32,.06);
+}
+
+/* Bloque: tc-quick-label */
+.tc-quick-label{
+  display: block;
+  font-weight: 800;
+  font-size: .85rem;
+  color: rgba(11,18,32,.55);
+  letter-spacing: .02em;
+}
+
+.tc-quick-card strong{
+  display: block;
+  margin-top: 6px;
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: var(--tc-navy);
+}
+
+/* RIGHT COLUMN */
+.tc-profile-card,
+/* Bloque: tc-help-card */
+.tc-help-card{
+  background: var(--surface);
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 22px;
+  box-shadow: 0 14px 40px rgba(11,18,32,.10);
+  padding: 18px;
+}
+
+/* Bloque: tc-profile-top */
+.tc-profile-top{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Bloque: tc-avatar */
+.tc-avatar{
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(4,33,90,.08);
+  border: 1px solid rgba(4,33,90,.10);
+  color: var(--tc-navy);
+  font-weight: 900;
+}
+
+/* Bloque: tc-profile-name */
+.tc-profile-name{
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--text);
+}
+
+/* Bloque: tc-profile-email */
+.tc-profile-email{
+  margin: 2px 0 0;
+  color: rgba(11,18,32,.65);
+  font-weight: 700;
+}
+
+/* Bloque: tc-profile-actions */
+.tc-profile-actions{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+/* Bloque: tc-profile-note */
+.tc-profile-note{
+  margin: 12px 0 0;
+  color: rgba(11,18,32,.55);
+  font-weight: 700;
+  font-size: .92rem;
+}
+
+/* Bloque: tc-help-card */
+.tc-help-card{
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Bloque: tc-help-ico */
+.tc-help-ico{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(5,174,238,.14);
+  border: 1px solid rgba(5,174,238,.22);
+  flex: 0 0 44px;
+}
+
+.tc-help-card strong{
+  display: block;
+  color: var(--text);
+  font-weight: 900;
+  margin-bottom: 2px;
+}
+
+.tc-help-card p{
+  margin: 0 0 8px;
+  color: rgba(11,18,32,.68);
+}
+
+/* Bloque: tc-help-link */
+.tc-help-link{
+  font-weight: 900;
+  color: var(--tc-navy);
+  padding: 8px 10px;
+  border-radius: 12px;
+  display: inline-block;
+  background: rgba(4,33,90,.06);
+  border: 1px solid rgba(4,33,90,.10);
+  transition: transform .18s var(--ease), background .18s var(--ease);
+}
+
+.tc-help-link:hover{
+  transform: translateY(-1px);
+  background: rgba(5,174,238,.14);
+}
+
+/* Tabs */
+/* Bloque: tc-account-tabs */
+.tc-account-tabs{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  background: rgba(255,255,255,.75);
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 999px;
+  padding: 8px;
+
+  box-shadow: 0 10px 24px rgba(11,18,32,.06);
+}
+
+/* Bloque: tc-tab */
+.tc-tab{
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  font-weight: 900;
+  color: rgba(11,18,32,.70);
+  transition: background .18s var(--ease), transform .18s var(--ease), color .18s var(--ease);
+}
+
+.tc-tab:hover{
+  background: rgba(4,33,90,.06);
+  transform: translateY(-1px);
+}
+
+.tc-tab.is-active{
+  background: var(--tc-navy);
+  color: #fff;
+}
+
+/* Panels */
+/* Bloque: tc-account-panels */
+.tc-account-panels{
+  margin-top: 16px;
+}
+
+/* Bloque: tc-panel */
+.tc-panel{
+  display: none;
+}
+
+.tc-panel.is-active{
+  display: block;
+}
+
+/* Bloque: tc-panel-head */
+.tc-panel-head{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+
+  margin: 18px 0 14px;
+}
+
+.tc-panel-head h2{
+  margin: 0;
+  color: var(--tc-navy);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.tc-panel-head p{
+  margin: 6px 0 0;
+  color: rgba(11,18,32,.65);
+  font-weight: 700;
+}
+
+/* Buttons (local) */
+/* Bloque: tc-btn */
+.tc-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-weight: 900;
+  cursor: pointer;
+
+  border: 1px solid rgba(11,18,32,.10);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+}
+
+/* Bloque: tc-btn--primary */
+.tc-btn--primary{
+  background: var(--tc-navy);
+  color: #fff;
+}
+
+.tc-btn--primary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(11,18,32,.10);
+  background: #063079;
+}
+
+/* Bloque: tc-btn--outline */
+.tc-btn--outline{
+  background: rgba(255,255,255,.9);
+  color: var(--tc-navy);
+  border: 1px solid rgba(4,33,90,.14);
+}
+
+.tc-btn--outline:hover{
+  transform: translateY(-1px);
+  background: rgba(5,174,238,.12);
+}
+
+/* Grid */
+/* Bloque: tc-grid */
+.tc-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
+}
+
+/* Purchase card */
+/* Bloque: tc-purchase */
+.tc-purchase{
+  background: var(--surface);
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(11,18,32,.08);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease);
+}
+
+.tc-purchase:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 44px rgba(11,18,32,.12);
+  border-color: rgba(5,174,238,.30);
+}
+
+/* Bloque: tc-purchase__top */
+.tc-purchase__top{
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid rgba(11,18,32,.06);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Bloque: tc-purchase__title */
+.tc-purchase__title{
+  margin: 0;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+/* Bloque: tc-purchase__meta */
+.tc-purchase__meta{
+  margin: 6px 0 0;
+  color: rgba(11,18,32,.65);
+  font-weight: 700;
+  font-size: .92rem;
+}
+
+/* Bloque: tc-status */
+.tc-status{
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(247,248,252,.75);
+  font-weight: 900;
+  font-size: .85rem;
+  color: rgba(11,18,32,.75);
+  white-space: nowrap;
+}
+
+.tc-status.is-paid{
+  background: rgba(5,174,238,.14);
+  border-color: rgba(5,174,238,.25);
+  color: var(--tc-navy);
+}
+
+.tc-status.is-pending{
+  background: rgba(252,192,4,.18);
+  border-color: rgba(252,192,4,.30);
+  color: #0B1220;
+}
+
+.tc-status.is-cancel{
+  background: rgba(220,38,38,.10);
+  border-color: rgba(220,38,38,.22);
+  color: rgba(127,29,29,.95);
+}
+
+/* Bloque: tc-purchase__body */
+.tc-purchase__body{
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+/* Bloque: tc-price-row */
+.tc-price-row{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Bloque: tc-price-now */
+.tc-price-now{
+  font-weight: 900;
+  color: var(--tc-navy);
+  font-size: 1.1rem;
+}
+
+/* Bloque: tc-price-old */
+.tc-price-old{
+  color: rgba(11,18,32,.45);
+  text-decoration: line-through;
+  font-weight: 800;
+  font-size: .92rem;
+}
+
+/* Bloque: tc-purchase__actions */
+.tc-purchase__actions{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+/* Bloque: tc-link-btn */
+.tc-link-btn{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 14px;
+  padding: 11px 12px;
+  font-weight: 900;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.95);
+  color: var(--tc-navy);
+  transition: transform .18s var(--ease), background .18s var(--ease);
+}
+
+.tc-link-btn:hover{
+  transform: translateY(-1px);
+  background: rgba(5,174,238,.12);
+}
+
+.tc-link-btn.is-primary{
+  background: var(--tc-navy);
+  color: #fff;
+}
+
+.tc-link-btn.is-primary:hover{
+  background: #063079;
+}
+
+/* Settings */
+/* Bloque: tc-settings-grid */
+.tc-settings-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Bloque: tc-card */
+.tc-card{
+  background: var(--surface);
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 14px 40px rgba(11,18,32,.08);
+}
+
+.tc-card h3{
+  margin: 0 0 8px;
+  color: var(--tc-navy);
+  font-weight: 900;
+}
+
+.tc-card p{
+  margin: 0 0 14px;
+  color: rgba(11,18,32,.65);
+  font-weight: 700;
+}
+
+/* Bloque: tc-form */
+.tc-form{
+  display: grid;
+  gap: 12px;
+}
+
+.tc-field label{
+  display: block;
+  font-weight: 900;
+  font-size: .92rem;
+  color: rgba(11,18,32,.78);
+  margin-bottom: 6px;
+}
+
+.tc-field input{
+  width: 100%;
+  font-family: var(--font-sans);
+  border: 1px solid rgba(11,18,32,.14);
+  border-radius: 14px;
+  padding: 12px 12px;
+  background: #fff;
+  outline: none;
+  transition: border-color .18s var(--ease), box-shadow .18s var(--ease);
+  box-sizing: border-box;
+}
+
+.tc-field input:focus{
+  border-color: rgba(5,174,238,.55);
+  box-shadow: 0 0 0 5px rgba(5,174,238,.18);
+}
+
+/* Bloque: tc-form-note */
+.tc-form-note{
+  margin: 0;
+  font-weight: 800;
+  color: rgba(11,18,32,.60);
+}
+
+/* States */
+.hidden{ display: none !important; }
+
+/* Bloque: tc-state */
+.tc-state{
+  margin-top: 10px;
+}
+
+/* Bloque: tc-empty-card */
+.tc-empty-card{
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 14px 40px rgba(11,18,32,.08);
+}
+
+.tc-empty-card h3{
+  margin: 0 0 6px;
+  color: var(--tc-navy);
+  font-weight: 900;
+}
+
+.tc-empty-card p{
+  margin: 0 0 12px;
+  color: rgba(11,18,32,.65);
+  font-weight: 700;
+}
+
+/* Skeleton */
+/* Bloque: tc-skeleton-grid */
+.tc-skeleton-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
+}
+
+/* Bloque: tc-skeleton */
+.tc-skeleton{
+  height: 170px;
+  border-radius: 22px;
+  border: 1px solid rgba(11,18,32,.08);
+  background: linear-gradient(90deg, rgba(11,18,32,.06), rgba(11,18,32,.10), rgba(11,18,32,.06));
+  background-size: 220% 100%;
+  animation: sk 1.2s linear infinite;
+}
+
+@keyframes sk{
+  from{ background-position: 0% 0; }
+  to{ background-position: 200% 0; }
+}
+
+/* Reveal */
+/* Bloque: tc-reveal */
+.tc-reveal{
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .55s var(--ease), transform .55s var(--ease);
+  transition-delay: var(--d, 0ms);
+}
+.tc-reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 980px){
+/* Bloque: tc-account-hero__inner */
+  .tc-account-hero__inner{ grid-template-columns: 1fr; }
+/* Bloque: tc-profile-actions */
+  .tc-profile-actions{ grid-template-columns: 1fr; }
+/* Bloque: tc-grid */
+  .tc-grid{ grid-template-columns: 1fr; }
+/* Bloque: tc-skeleton-grid */
+  .tc-skeleton-grid{ grid-template-columns: 1fr; }
+/* Bloque: tc-settings-grid */
+  .tc-settings-grid{ grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .tc-reveal,
+/* Bloque: tc-skeleton */
+  .tc-skeleton{
+    transition: none !important;
+    animation: none !important;
+  }
+}

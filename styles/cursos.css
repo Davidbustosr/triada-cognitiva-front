@@ -1,0 +1,398 @@
+/***************************************************************************************************
+ * styles/cursos.css
+ * - Estilos específicos de la página/componente.
+ * - Mantiene coherencia con tokens/variables definidos en main.css (:root).
+ ***************************************************************************************************/
+
+/* ==========================================================================
+   CURSOS (página listado) - Look profesional + micro animaciones
+   Depende de variables de main.css (root: --tc-navy, --bg, --surface, etc.)
+========================================================================== */
+
+/* Bloque: tc-catalog-hero */
+.tc-catalog-hero{
+  background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+  padding: clamp(28px, 4vw, 44px) 0;
+}
+
+/* Bloque: tc-catalog-hero__inner */
+.tc-catalog-hero__inner{
+  text-align: center;
+}
+
+/* Bloque: tc-catalog-hero__title */
+.tc-catalog-hero__title{
+  margin: 0 0 10px;
+  font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+  color: var(--tc-navy);
+  letter-spacing: -0.02em;
+}
+
+/* Bloque: tc-catalog-hero__lead */
+.tc-catalog-hero__lead{
+  margin: 0 auto;
+  max-width: 70ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* Bloque: tc-catalog-hero__meta */
+.tc-catalog-hero__meta{
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Bloque: tc-meta-pill */
+.tc-meta-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(11,18,32,.10);
+  box-shadow: 0 10px 28px rgba(11,18,32,.06);
+  color: rgba(11,18,32,.78);
+  font-weight: 600;
+}
+
+/* Bloque: tc-meta-dot */
+.tc-meta-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tc-cyan);
+  box-shadow: 0 0 0 4px rgba(5,174,238,.18);
+}
+
+/* Head */
+/* Bloque: tc-catalog */
+.tc-catalog{
+  background: var(--bg);
+}
+
+/* Bloque: tc-catalog-head */
+.tc-catalog-head{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+/* Bloque: tc-catalog-title */
+.tc-catalog-title{
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--tc-navy);
+}
+
+/* Bloque: tc-catalog-sub */
+.tc-catalog-sub{
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+/* Bloque: tc-catalog-count */
+.tc-catalog-count{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(11,18,32,.10);
+  background: rgba(255,255,255,.75);
+  color: rgba(11,18,32,.75);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Grid */
+/* Bloque: tc-catalog-grid */
+.tc-catalog-grid{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 1200px){
+/* Bloque: tc-catalog-grid */
+  .tc-catalog-grid{ gap: 16px; }
+}
+@media (max-width: 980px){
+/* Bloque: tc-catalog-head */
+  .tc-catalog-head{ flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 720px){
+/* Bloque: tc-catalog-grid */
+  .tc-catalog-grid{ gap: 14px; }
+}
+
+/* Card (tipo ADIPA, profesional) */
+/* Bloque: tc-course-card */
+.tc-course-card{
+  grid-column: span 3;
+  background: #fff;
+  border: 1px solid rgba(11,18,32,.10);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(11,18,32,.08);
+  transform: translateY(0);
+  transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+  position: relative;
+}
+
+@media (max-width: 1200px){
+/* Bloque: tc-course-card */
+  .tc-course-card{ grid-column: span 4; }
+}
+@media (max-width: 860px){
+/* Bloque: tc-course-card */
+  .tc-course-card{ grid-column: span 6; }
+}
+@media (max-width: 520px){
+/* Bloque: tc-course-card */
+  .tc-course-card{ grid-column: span 12; }
+}
+
+.tc-course-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 22px 60px rgba(11,18,32,.14);
+}
+
+/* Imagen + overlay */
+/* Bloque: tc-course-media */
+.tc-course-media{
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, rgba(1,33,97,.92), rgba(5,174,238,.18));
+  overflow: hidden;
+}
+
+.tc-course-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.03);
+  transition: transform .6s var(--ease), filter .6s var(--ease);
+}
+
+.tc-course-card:hover .tc-course-media img{
+  transform: scale(1.08);
+  filter: saturate(1.05);
+}
+
+.tc-course-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(70% 60% at 50% 40%, rgba(255,255,255,.10), rgba(0,0,0,.26));
+  pointer-events: none;
+}
+
+/* Badges arriba */
+/* Bloque: tc-course-badges */
+.tc-course-badges{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  z-index: 2;
+}
+
+/* Bloque: tc-badge */
+.tc-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 800;
+  background: rgba(255,255,255,.92);
+  color: var(--tc-navy);
+  border: 1px solid rgba(11,18,32,.10);
+  backdrop-filter: blur(8px);
+}
+
+.tc-badge .dot{
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34,197,94,.18);
+}
+
+/* Rating (abajo izquierda sobre imagen) */
+/* Bloque: tc-course-rating */
+.tc-course-rating{
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(11,18,32,.62);
+  color: #fff;
+  font-weight: 800;
+  font-size: .85rem;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.20);
+}
+
+/* Cuerpo */
+/* Bloque: tc-course-body */
+.tc-course-body{
+  padding: 16px 16px 14px;
+}
+
+/* Bloque: tc-course-title */
+.tc-course-title{
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+/* Bloque: tc-course-sub */
+.tc-course-sub{
+  margin: 0 0 14px;
+  color: rgba(11,18,32,.68);
+  font-size: .95rem;
+  line-height: 1.45;
+  min-height: 2.8em; /* mantiene altura pareja */
+}
+
+/* Bloque: tc-course-meta-row */
+.tc-course-meta-row{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(11,18,32,.06);
+}
+
+/* Bloque: tc-course-price */
+.tc-course-price{
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+/* Bloque: tc-price-now */
+.tc-price-now{
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--text);
+}
+
+/* Bloque: tc-price-old */
+.tc-price-old{
+  font-size: .92rem;
+  color: rgba(11,18,32,.45);
+  text-decoration: line-through;
+}
+
+/* Bloque: tc-discount */
+.tc-discount{
+  font-size: .78rem;
+  font-weight: 900;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: rgba(5,174,238,.14);
+  color: #035b7c;
+  border: 1px solid rgba(5,174,238,.22);
+}
+
+/* Footer acciones */
+/* Bloque: tc-course-actions */
+.tc-course-actions{
+  padding: 12px 16px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Bloque: tc-btn-go */
+.tc-btn-go{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: var(--tc-navy);
+  color: #fff;
+  font-weight: 900;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 12px 30px rgba(1,33,97,.18);
+  transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+  white-space: nowrap;
+}
+
+.tc-btn-go:hover{
+  transform: translateY(-2px);
+  background: #063079;
+  box-shadow: 0 18px 44px rgba(1,33,97,.24);
+}
+
+/* Bloque: tc-btn-detail */
+.tc-btn-detail{
+  font-weight: 900;
+  color: var(--tc-navy);
+  padding: 10px 12px;
+  border-radius: 12px;
+  transition: background .18s var(--ease);
+}
+
+.tc-btn-detail:hover{
+  background: rgba(4,33,90,.06);
+}
+
+/* Hover “shine” sutil */
+.tc-course-card::before{
+  content:"";
+  position:absolute;
+  inset:-40% -60%;
+  background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.26) 35%, transparent 70%);
+  transform: translateX(-40%) rotate(12deg);
+  opacity: 0;
+  transition: opacity .25s var(--ease);
+  pointer-events: none;
+}
+
+.tc-course-card:hover::before{
+  opacity: 1;
+  animation: tcShine 1.05s var(--ease) both;
+}
+
+@keyframes tcShine{
+  from{ transform: translateX(-55%) rotate(12deg); }
+  to{ transform: translateX(55%) rotate(12deg); }
+}
+
+/* Empty */
+/* Bloque: tc-catalog-empty */
+.tc-catalog-empty{
+  margin-top: 18px;
+  padding: 18px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(11,18,32,.10);
+  color: rgba(11,18,32,.75);
+}
+
+/* Asegura que el reveal (si aún no está visible) no deje espacios raros */
+/* Bloque: tc-reveal */
+.tc-reveal{
+  will-change: transform, opacity;
+}
